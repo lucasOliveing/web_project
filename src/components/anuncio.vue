@@ -2,10 +2,10 @@
 </script>
 
 <template>
-  <div class="container">
+  <div class="container ">
     <div class="row">
       <div class="col-8">
-        <h1>Bootstrap</h1>
+        <h1>content </h1>
       </div>
       <div class="col ms-5">
         <h1>category</h1>
@@ -13,21 +13,24 @@
     </div>
   </div>
 
-  <div class="conteiner">
-    <div class="row ">
 
-      <div class="col-2 my-3 ms-4 border py-5">
 
-            <h5>tittle <h5>price</h5>
-            </h5>
+  <div class="container w-75 position-relative float-start clearfixs ms-4">
+    <div class="row mb-5">
 
-          <h5>description:</h5>
-            <p>asdada</p>
-
+      <div class="col-4 border">
+        <h2 d-flex>titlea</h2>
+        <h2>price</h2>
+        <h2>description</h2>
+        <h2>description</h2>
+        <h2>description</h2>
+        <h2>description</h2>
 
       </div>
 
-      <div class="col-5 m-3">
+
+
+      <div class="col-8 border">
         <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
@@ -71,7 +74,15 @@
             <span class="visually-hidden">Next</span>
           </button>
         </div>
+
+
+
       </div>
+
     </div>
+
+
+
+
   </div>
 </template>

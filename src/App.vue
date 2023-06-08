@@ -1,6 +1,7 @@
 <script setup>
 import anuncio from './components/anuncio.vue'
 import cabecalho from "./components/head.vue" 
+import categoria from "./components/categoria.vue"
 </script>
 
 <template>
@@ -16,6 +17,7 @@ import cabecalho from "./components/head.vue"
  
       <cabecalho/>
  <anuncio/>
+ <categoria/>
 </template>
 
 <style scoped>
