@@ -14,10 +14,11 @@ import categoria from "./components/categoria.vue"
         </a>
       </div>
       <HelloWorld msg="Vite + Vue" /> -->
- 
+ <div class="container overflow-auto">
       <cabecalho/>
  <anuncio/>
  <categoria/>
+</div>
 </template>
 
 <style scoped>
