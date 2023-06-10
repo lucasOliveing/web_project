@@ -2,23 +2,18 @@
 import anuncio from './components/anuncio.vue'
 import cabecalho from "./components/head.vue" 
 import categoria from "./components/categoria.vue"
+
+
 </script>
 
 <template>
-  <!-- <div class = "conteiner">
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-          <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-        </a>
-      </div>
-      <HelloWorld msg="Vite + Vue" /> -->
  <div class="container overflow-auto">
-      <cabecalho/>
+  <cabecalho/>
  <anuncio/>
  <categoria/>
+ 
 </div>
+
 </template>
 
 <style scoped>
