@@ -1,19 +1,19 @@
 <script setup>
 import anuncio from './components/anuncio.vue'
-import cabecalho from "./components/head.vue" 
+import cabecalho from "./components/head.vue"
 import categoria from "./components/categoria.vue"
 
 
 </script>
 
 <template>
- <div class="container overflow-auto">
-  <cabecalho/>
- <anuncio/>
- <categoria/>
- 
-</div>
+  <div class="container overflow-auto">
 
+    <cabecalho />
+    <!-- <anuncio />
+    <categoria /> -->
+
+  </div>
 </template>
 
 <style scoped>
