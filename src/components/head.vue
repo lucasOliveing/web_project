@@ -4,17 +4,18 @@ import { ref, reactive, onMounted } from 'vue';
 import { api } from "../apiConfig.js";
 
 
-const token = ref([]);
 
-function Login(email, password) {
+const form = ref({
+    email: '',
+    password: ''
+});
 
-    api.post('/auth/local', {
-        identifier: email,
-        password: password,
-    }).then(response => token.value = response)
+const Login = async () => {
 
-    return { token };
-
+    await api.post('/auth/local', {
+        identifier: form.value.email,
+        password: form.value.password,
+    }).then(response => console.log(response))
 }
 
 
@@ -47,17 +48,16 @@ function Login(email, password) {
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body container">
-            <form class="float-start" @submit="Login(email, password)">
+            <form class="float-start" @submit.prevent="Login">
                 <div class="form-group">
 
-                    <input v-model="email" type="email" class="form-control m-3" aria-describedby="emailHelp"
+                    <input v-model="form.email" type="email" class="form-control m-3" aria-describedby="emailHelp"
                         placeholder="Email">
 
                     
-                    <input v-model="password" type="password" class="form-control m-3" placeholder="Senha">
+                    <input v-model="form.password" type="password" class="form-control m-3" placeholder="Senha">
                 </div>
-                <button type="button" class="btn btn-primary float-start ms-4"
-                    @click="Login(email, password)">Login</button>
+                <button type="submit" class="btn btn-primary float-start ms-4">Login</button>
                 <div class="form-group form-check float-end">
 
                     <input type="checkbox" class="form-check-input">
@@ -79,7 +79,7 @@ function Login(email, password) {
             <form class="float-start">
                 <div class="form-group">
                     <!-- <label for="exampleInputEmail1">Endereço de email</label> -->
-                    <input type="email" class="form-control mx-3 my-3" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    <input type="email" class="form-control mx-3 my-3" aria-describedby="emailHelp"
                         placeholder="Seu email">
                     <!-- <small id="emailHelp" class="form-text text-muted">Nunca vamos compartilhar seu email, com ninguém.</small> -->
 
@@ -99,7 +99,8 @@ function Login(email, password) {
             </form>
         </div>
     </div>
-   {{ token }}
+    {{ form }}
+   {{ Login }}
 </template>
 
 

@@ -7,14 +7,19 @@ import categoria from "./components/categoria.vue"
 </script>
 
 <template>
-  <div class="container overflow-auto">
 
+  <main>
     <cabecalho />
-    <!-- <anuncio />
-    <categoria /> -->
 
-  </div>
-</template>
+  </main>
+  <!-- <div class="container overflow-auto">
+
+    
+    <anuncio />
+    <categoria />
+
+  </div>-->
+</template> 
 
 <style scoped>
 .logo {
