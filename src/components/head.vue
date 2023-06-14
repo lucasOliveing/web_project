@@ -1,22 +1,14 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue';
-
+import { Auth } from "../stores/auth.js"
 import { api } from "../apiConfig.js";
-
-
 
 const form = ref({
     email: '',
     password: ''
 });
 
-const Login = async () => {
-
-    await api.post('/auth/local', {
-        identifier: form.value.email,
-        password: form.value.password,
-    }).then(response => console.log(response))
-}
+const auth = Auth();
 
 
 </script>
@@ -27,17 +19,19 @@ const Login = async () => {
         <div class="container-fluid">
             <a class="navbar-brand ms-5">Ads Qxd logo</a>
             <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" v-model="seach">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="button" @click="Search(search)">Search</button>
             </form>
 
-            <div>
+            <div v-if="!auth.logged">
                 <button class="btn btn-primary mx-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#login"
                     aria-controls="login">Login</button>
 
                 <button class="btn btn-outline-success" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#register">Register</button>
             </div>
+            <div v-else><button class="btn btn-primary mx-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#login"
+                    aria-controls="login">UserOptions</button></div>
         </div>
     </nav>
 
@@ -48,7 +42,7 @@ const Login = async () => {
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body container">
-            <form class="float-start" @submit.prevent="Login">
+            <form class="float-start" @submit.prevent="auth.login(form.email, form.password)">
                 <div class="form-group">
 
                     <input v-model="form.email" type="email" class="form-control m-3" aria-describedby="emailHelp"
@@ -100,7 +94,7 @@ const Login = async () => {
         </div>
     </div>
     {{ form }}
-   {{ Login }}
+   {{ auth.logged }}
 </template>
 
 
