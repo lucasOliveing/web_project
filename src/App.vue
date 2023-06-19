@@ -9,12 +9,19 @@ import categoria from "./components/categoriaBar.vue"
 
 <template>
     
-    <main class="container overflow-auto">
+   <!--  <main class="container overflow-auto">
       <cabecalho />
       <anuncio />
       <categoria />
+        
+    </main> -->
 
-    </main>
+    <div>
+    <router-link to="/">Home</router-link>
+    <router-link to="/about">About</router-link>
+
+    <router-view></router-view>
+  </div>
 </template> 
 
 <style scoped>
