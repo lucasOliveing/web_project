@@ -17,9 +17,8 @@ export default defineComponent({
   },
 });
 </script>
-
 <template>
-  <div v-for="(anuncio, i) in anuncios" :key="i">
+  <div v-for="(anuncio, i) in anuncios" :key="i" id="ads" class="anuncios">
     <div class="container w-75 position-relative float-start ms-4">
       <div class="row mb-5">
 

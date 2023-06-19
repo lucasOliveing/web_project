@@ -1,11 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import header from "../components/head.vue"
+
+
+const Home = { template: '<div>testinggg asdfiwrw</div>' }
+const About = { template: '<div>About</div>' }
+
+
 
 const routes = [
-    { path: '/', componet: header},
-]
-
+    { path: '/', component: Home },
+    { path: '/about', component: About },
+  ]
 
 const router = createRouter({
     history: createWebHistory(),

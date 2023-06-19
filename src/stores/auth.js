@@ -55,16 +55,17 @@ export const Auth = defineStore('auth', {
             })
         },
 
-        getUserAds: async () =>{
+        async getUserAds(){
 
-            await api.get("users/" + id + "?populate=anuncios", {
-                 
-                    Authorization: this.token
-            }
+            await api.get(`users/${this.id}?populate=anuncios.photos`, {
+                 headers:{
+                    Authorization: `Bearer ${this.token}`,
+            },}
             ).then(response => {
                 if(response.status == '200'){
-                this.anuncios.value = response
-                    console.log("sucesso na requisicao dos anuncios do usuario")
+                this.anuncios.value = response.data
+                    console.log("sucesso na requisicao dos anuncios do usuario");
+                    console.log(response)
                 }else{
                     console.log("falha na requisicao dos anuncios do usuario");
                     console.log(response)

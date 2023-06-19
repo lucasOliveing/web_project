@@ -33,7 +33,7 @@ function handleImage(event) {
 
 
 <template>
-    <nav class="navbar navbar-light bg-light mb-4">
+    <nav class="navbar navbar-light bg-light mb-4" id="navbar">
         <div class="container-fluid">
 
 
@@ -178,9 +178,9 @@ function handleImage(event) {
             <div class="offcanvas-body container">
 
 
-                <form class="float-start">
+                <form class="float-start"  @submit.prevent="auth.getUserAds()">
                         <!-- opcoes -->
-                    <div class="form-group" @submit.prevent="auth.getUserAds">
+                    <div class="form-group">
                        
                         <button type="button" class="btn btn-primary float-start m-3" data-bs-toggle="offcanvas"
                             data-bs-target="#userAds">Adicionar Anuncios</button>
@@ -255,7 +255,7 @@ function handleImage(event) {
                         <div class="form-check ">
                             <input class="form-check-input" type="radio"  name="RadioOptions" id="Radio4"
                                 value="opcao3">
-                            <label class="form-check-label float-start" for="Radio4">Usado</label>
+                            <label class="form-check-label float-start" for="Radio4">Usado em condiçoes razoaveis</label>
                         </div>
                     </div>
                 </div>
@@ -280,8 +280,7 @@ function handleImage(event) {
     {{ auth.token }}
     <h5>User ID: {{ auth.id }}</h5>
     <h1>anuncios do usuario</h1>
-    <div v-if="auth.logged" v-bind="auth.getUserAds"></div>
-    {{ auth.anuncios }}
+    {{ auth.anuncios.value}}
 
 </template>
 

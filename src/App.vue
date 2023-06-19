@@ -1,7 +1,8 @@
 <script setup>
+import router from './router/index.js'
 import anuncio from './components/anuncio.vue'
 import cabecalho from "./components/head.vue"
-import categoria from "./components/categoria.vue"
+import categoria from "./components/categoriaBar.vue"
 
 
 </script>
@@ -10,7 +11,6 @@ import categoria from "./components/categoria.vue"
     
     <main class="container overflow-auto">
       <cabecalho />
-
       <anuncio />
       <categoria />
 
