@@ -1,7 +1,7 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue';
 import { Auth } from "../stores/auth.js"
-import { api } from "../apiConfig.js";
+import router from '../router/index.js'
 
 const formRegist = ref({
     username: '',
@@ -73,8 +73,8 @@ function handleImage(event) {
         </div>
         <div class="offcanvas-body container">
             <form class="float-start" @submit.prevent="auth.login(formLogin.email, formLogin.password)">
-                
-                
+
+
                 <!-- formulario -->
                 <div class="form-group">
 
@@ -86,7 +86,7 @@ function handleImage(event) {
                     <input v-model="formLogin.password" type="password" class="form-control m-3" placeholder="Senha">
                 </div>
 
-                        <!-- button -->
+                <!-- button -->
                 <button type="submit" class="btn btn-primary float-start ms-4" data-bs-toggle="offcanvas"
                     data-bs-target="#userOpt">Login</button>
                 <div class="form-group form-check float-end">
@@ -111,30 +111,34 @@ function handleImage(event) {
             <h5 id="loginLabel">Register</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-                        <!-- formulario -->
+        <!-- formulario -->
         <div class="offcanvas-body container">
-            <form class="float-start" @submit.prevent="auth.register(formRegist.username,formRegist.email, formRegist.password)">
+            <form class="float-start"
+                @submit.prevent="auth.register(formRegist.username, formRegist.email, formRegist.password)">
 
                 <!-- username -->
                 <div class="form-group">
-                    <input v-model="formRegist.username" type="text" class="form-control mx-3 my-3" placeholder="Nome de Usuário">
+                    <input v-model="formRegist.username" type="text" class="form-control mx-3 my-3"
+                        placeholder="Nome de Usuário">
                 </div>
-                
+
                 <!-- email -->
                 <div class="form-group">
-                    <input v-model="formRegist.email" type="email" class="form-control mx-3 my-3" aria-describedby="emailHelp" placeholder="Seu email">
+                    <input v-model="formRegist.email" type="email" class="form-control mx-3 my-3"
+                        aria-describedby="emailHelp" placeholder="Seu email">
                 </div>
 
                 <!-- password -->
-                
+
                 <div class="form-group">
                     <input v-model="formRegist.password" type="password" class="form-control mx-3 my-1" placeholder="Senha">
                 </div>
                 <div class="form-group">
-                    <input v-model="formRegist.passwordConfir" type="password" class="form-control mx-3 mb-2" placeholder="Confirmar senha">
+                    <input v-model="formRegist.passwordConfir" type="password" class="form-control mx-3 mb-2"
+                        placeholder="Confirmar senha">
                 </div>
-                
-                
+
+
                 <!-- end -->
                 <button type="submit" class="btn btn-outline-success float-start ms-4">Register</button>
                 <!-- <div class="form-group form-check float-end">
@@ -178,15 +182,16 @@ function handleImage(event) {
             <div class="offcanvas-body container">
 
 
-                <form class="float-start"  @submit.prevent="auth.getUserAds()">
-                        <!-- opcoes -->
+                <form class="float-start">
+                    <!-- opcoes -->
                     <div class="form-group">
-                       
+
                         <button type="button" class="btn btn-primary float-start m-3" data-bs-toggle="offcanvas"
                             data-bs-target="#userAds">Adicionar Anuncios</button>
 
-                        <button type="submit" class="btn btn-primary float-start m-3">Gerenciar Anuncios</button>
-
+                        
+                        <router-link to="/userAds"><button type="button" class="btn btn-primary float-start m-3" @click="auth.getUserAds()" >Gerenciar
+                                Anuncios</button></router-link>
                     </div>
 
                     <button type="button" class="btn btn-danger float-start my-5 ms-3">Configuracoes da Conta</button>
@@ -238,23 +243,19 @@ function handleImage(event) {
                     </label>
                     <div class="border p-3" id="condition">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="RadioOptions" id="Radio1"
-                                value="opcao1">
+                            <input class="form-check-input" type="radio" name="RadioOptions" id="Radio1" value="opcao1">
                             <label class="form-check-label float-start" for="Radio1">Novo</label>
                         </div>
                         <div class="form-check ">
-                            <input class="form-check-input" type="radio" name="RadioOptions" id="Radio2"
-                                value="opcao2">
+                            <input class="form-check-input" type="radio" name="RadioOptions" id="Radio2" value="opcao2">
                             <label class="form-check-label float-start" for="Radio2">Usado em estado novo</label>
                         </div>
                         <div class="form-check ">
-                            <input class="form-check-input" type="radio" name="RadioOptions" id="Radio3"
-                                value="opcao3">
+                            <input class="form-check-input" type="radio" name="RadioOptions" id="Radio3" value="opcao3">
                             <label class="form-check-label float-start" for="Radio3">Usado em boas condicoes</label>
                         </div>
                         <div class="form-check ">
-                            <input class="form-check-input" type="radio"  name="RadioOptions" id="Radio4"
-                                value="opcao3">
+                            <input class="form-check-input" type="radio" name="RadioOptions" id="Radio4" value="opcao3">
                             <label class="form-check-label float-start" for="Radio4">Usado em condiçoes razoaveis</label>
                         </div>
                     </div>
@@ -279,9 +280,6 @@ function handleImage(event) {
     {{ auth.logged }}
     {{ auth.token }}
     <h5>User ID: {{ auth.id }}</h5>
-    <h1>anuncios do usuario</h1>
-    {{ auth.anuncios.value}}
-
 </template>
 
 

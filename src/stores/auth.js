@@ -15,7 +15,7 @@ export const Auth = defineStore('auth', {
             token: '',
             data: ref([]),
             resonseStatus: '',
-            anuncios: ref([])
+            anuncios: ref([]),
         }
 
     },
@@ -72,7 +72,7 @@ export const Auth = defineStore('auth', {
                 }
             })
             
-        }
+        },
 
 
     },
