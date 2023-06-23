@@ -10,7 +10,7 @@ export const publicContent = defineStore('public', {
             anuncios: ref([]),
             loaded: false,
             categorias: ref([]),
-            catLoaded: false,
+            cLoaded: false,
         }
     },
 

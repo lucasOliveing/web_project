@@ -190,7 +190,7 @@ function handleImage(event) {
                             data-bs-target="#userAds">Adicionar Anuncios</button>
 
                         
-                        <router-link to="/userAds"><button type="button" class="btn btn-primary float-start m-3" @click="auth.getUserAds()" >Gerenciar
+                        <router-link to="/userAds"><button type="button" class="btn btn-primary float-start m-3" >Gerenciar
                                 Anuncios</button></router-link>
                     </div>
 

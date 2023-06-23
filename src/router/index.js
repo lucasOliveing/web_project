@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import main from '../pages/main.vue'
+// import userAds from '../pages/userAds.vue'
 import userAds from '../components/userAds.vue'
+
 
  
 

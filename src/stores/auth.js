@@ -16,6 +16,7 @@ export const Auth = defineStore('auth', {
             data: ref([]),
             resonseStatus: '',
             anuncios: ref([]),
+            adsLoaded: false
         }
 
     },

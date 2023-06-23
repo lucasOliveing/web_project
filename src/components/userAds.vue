@@ -3,11 +3,20 @@ import { Auth } from '../stores/auth.js'
 
 const auth = Auth()
 
+if(!auth.adsLoaded && auth.logged)
+{
+  auth.getUserAds();
+  auth.adsLoaded = true;
+}
+
+
+
 </script>
 
 <template>
 
 <router-link to="/">voltar</router-link>
+
 <div v-if="auth.logged" v-for="(anuncio, i) in auth.anuncios.value.anuncios" :key="i" id="ads" class="anuncios">
     <div class="container w-75 position-relative float-start ms-4">
       <div class="row mb-5">
