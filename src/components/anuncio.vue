@@ -13,17 +13,16 @@ if(!pContent.loaded)
 
 </script>
 <template>
-   <router-link to="userAds">userAds</router-link>
-
+  <button type="button" class="btn" id="adm"><router-link to="userAds">userAds</router-link></button>
 
   <div v-for="(anuncio, i) in pContent.anuncios.value" :key="i"  class="anuncios">
     <div class="container w-75 position-relative float-start ms-4">
       <div class="row mb-5">
 
-      <div class="col-4 border">
-        <p d-flex>title:{{ anuncio.attributes.tittle }}</p>
-        <p>Price: {{ anuncio.attributes.price }}</p>
-        <p>description: {{ anuncio.attributes.description }}</p>>
+      <div class="col-4 border" id="text">
+        <p d-flex>{{ anuncio.attributes.tittle }}</p>
+        <p>{{ anuncio.attributes.price }}</p>
+        <p>{{ anuncio.attributes.description }}</p>>
       </div>
 
 
