@@ -1,7 +1,11 @@
 <script setup>
+
 import { ref, reactive, onMounted } from 'vue';
 import { Auth } from "../stores/auth.js"
 import router from '../router/index.js'
+// import addImg from './formulario/addAds.vue'
+
+
 
 const formRegist = ref({
     username: '',
@@ -29,6 +33,7 @@ function handleImage(event) {
     const file = event.target.files[0];
     data.images = file;
 }
+
 </script>
 
 
@@ -56,14 +61,6 @@ function handleImage(event) {
                     data-bs-target="#userOpt" aria-controls="login">User</button></div>
         </div>
     </nav>
-
-
-
-
-
-
-
-
 
     <!-- Login -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="login" aria-labelledby="loginLabel">
@@ -99,11 +96,6 @@ function handleImage(event) {
             </form>
         </div>
     </div>
-
-
-
-
-
 
     <!-- Register -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="register" aria-labelledby="loginLabel">
@@ -152,8 +144,6 @@ function handleImage(event) {
         </div>
     </div>
 
-
-
     <!-- UserIptions -->
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="userOpt" aria-labelledby="loginLabel">
@@ -189,8 +179,8 @@ function handleImage(event) {
                         <button type="button" class="btn btn-primary float-start m-3" data-bs-toggle="offcanvas"
                             data-bs-target="#userAds">Adicionar Anuncios</button>
 
-                        
-                        <router-link to="/userAds"><button type="button" class="btn btn-primary float-start m-3" >Gerenciar
+
+                        <router-link to="/userAds"><button type="button" class="btn btn-primary float-start m-3">Gerenciar
                                 Anuncios</button></router-link>
                     </div>
 
@@ -202,20 +192,13 @@ function handleImage(event) {
     </div>
 
 
-
-
-
     <!-- add Anuncio -->
-
-
     <div class="offcanvas offcanvas-end" tabindex="-1" id="userAds" aria-labelledby="loginLabel">
         <div class="offcanvas-header">
             <h5 class="float-center">Adicioar Anuncios</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body container">
-
-
             <!-- Formularios -->
             <form>
 
@@ -262,12 +245,8 @@ function handleImage(event) {
                 </div>
 
                 <!-- Adicionar Imagens -->
-                <div class="form-group my-1">
-                    <label for="imageFild" class="float-start" @change="handleImag">
-                        <h5>Adicionar Imagens</h5>
-                    </label>
-                    <input id="imageFiel" type="file" class="float-start" @change="handleImageChange">
-                </div>
+                    <!-- <addImg/> -->
+                
 
 
 

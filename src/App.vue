@@ -1,12 +1,13 @@
 <script setup>
 
-
+import addImg from './components/formulario/addAds.vue'
 </script>
 
 <template>
     
     <main class="container overflow-auto">
-      <router-view></router-view>
+      <!-- <router-view></router-view> -->
+      <addImg/>
     </main>
     
 
