@@ -241,7 +241,7 @@ function handleImage(event) {
 
 
                 <!-- Condicao -->
-                <div class="container mb-4">
+                <div class="container mb-4" id="selBox">
                     <label for="#condition">
                         <h5>Estado</h5>
                     </label>
