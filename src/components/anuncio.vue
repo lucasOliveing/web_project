@@ -13,7 +13,8 @@ if(!pContent.loaded)
 
 </script>
 <template>
-  <button type="button" class="btn" id="adm"><router-link to="userAds">userAds</router-link></button>
+   <!-- <router-link to="userAds">userAds</router-link> -->
+
 
   <div v-for="(anuncio, i) in pContent.anuncios.value" :key="i"  class="anuncios">
     <div class="container w-75 position-relative float-start ms-4">
