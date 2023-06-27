@@ -32,9 +32,9 @@ function handleImage(event) {
         <div class="container-fluid">
 
 
-            <a class="navbar-brand ms-5">Ads Qxd logo</a>
+            <a class="navbar-brand ms-5">Ads Qxd</a>
             <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <input  id="textBox" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="button" @click="Search(search)">Search</button>
             </form>
 
@@ -62,12 +62,12 @@ function handleImage(event) {
 
     <!-- Login -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="login" aria-labelledby="loginLabel">
-        <div class="offcanvas-header">
+        <div class="offcanvas-header" id="info2">
             <div id="seta"></div>
             <h5 id="loginLabel">Login</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body container">
+        <div class="offcanvas-body container" id="info">
             <form class="float-start" @submit.prevent="auth.login(formLogin.email, formLogin.password)">
 
 
@@ -75,11 +75,11 @@ function handleImage(event) {
                 <div class="form-group">
 
                     <!-- email -->
-                    <input v-model="formLogin.email" type="email" class="form-control m-3" aria-describedby="emailHelp"
+                    <input  id="textBox"  v-model="formLogin.email" type="email" class="form-control m-3" aria-describedby="emailHelp"
                         placeholder="Email">
 
                     <!-- Senha -->
-                    <input v-model="formLogin.password" type="password" class="form-control m-3" placeholder="Senha">
+                    <input  id="textBox"  v-model="formLogin.password" type="password" class="form-control m-3" placeholder="Senha">
                 </div>
 
                 <!-- button -->
@@ -103,34 +103,35 @@ function handleImage(event) {
 
     <!-- Register -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="register" aria-labelledby="loginLabel">
-        <div class="offcanvas-header">
+        <div class="offcanvas-header" id="info2">
+            <div id="seta"></div>
             <h5 id="loginLabel">Register</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <!-- formulario -->
-        <div class="offcanvas-body container">
+        <div class="offcanvas-body container" id="info">
             <form class="float-start"
                 @submit.prevent="auth.register(formRegist.username, formRegist.email, formRegist.password)">
 
                 <!-- username -->
                 <div class="form-group">
-                    <input v-model="formRegist.username" type="text" class="form-control mx-3 my-3"
+                    <input  id="textBox"  v-model="formRegist.username" type="text" class="form-control mx-3 my-3"
                         placeholder="Nome de Usuário">
                 </div>
 
                 <!-- email -->
                 <div class="form-group">
-                    <input v-model="formRegist.email" type="email" class="form-control mx-3 my-3"
+                    <input  id="textBox"  v-model="formRegist.email" type="email" class="form-control mx-3 my-3"
                         aria-describedby="emailHelp" placeholder="Seu email">
                 </div>
 
                 <!-- password -->
 
                 <div class="form-group">
-                    <input v-model="formRegist.password" type="password" class="form-control mx-3 my-1" placeholder="Senha">
+                    <input  id="textBox"  v-model="formRegist.password" type="password" class="form-control mx-3 my-1" placeholder="Senha">
                 </div>
                 <div class="form-group">
-                    <input v-model="formRegist.passwordConfir" type="password" class="form-control mx-3 mb-2"
+                    <input  id="textBox"  v-model="formRegist.passwordConfir" type="password" class="form-control mx-3 mb-2"
                         placeholder="Confirmar senha">
                 </div>
 
@@ -171,6 +172,7 @@ function handleImage(event) {
 
         <div v-else>
             <div class="offcanvas-header">
+                <div id="seta"></div>
                 <h5 id="loginLabel">UserOpt</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
@@ -205,7 +207,8 @@ function handleImage(event) {
 
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="userAds" aria-labelledby="loginLabel">
-        <div class="offcanvas-header">
+        <div class="offcanvas-header" id="info2">
+            <div id="seta"></div>
             <h5 class="float-center">Adicioar Anuncios</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>

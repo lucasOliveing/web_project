@@ -20,10 +20,10 @@ if(!pContent.loaded)
     <div class="container w-75 position-relative float-start ms-4">
       <div class="row mb-5">
 
-      <div class="col-4 border">
-        <p d-flex>title:{{ anuncio.attributes.tittle }}</p>
-        <p>Price: {{ anuncio.attributes.price }}</p>
-        <p>description: {{ anuncio.attributes.description }}</p>>
+      <div class="col-4 border" id="text">
+        <p d-flex>{{ anuncio.attributes.tittle }}</p>
+        <p>{{ anuncio.attributes.price }}</p>
+        <p>{{ anuncio.attributes.description }}</p>>
       </div>
 
 

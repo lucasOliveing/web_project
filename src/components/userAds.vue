@@ -6,16 +6,17 @@ const auth = Auth()
 </script>
 
 <template>
+  
 
-<router-link to="/">voltar</router-link>
+<button type="button" class="btn" id="adm"><router-link to="/">voltar</router-link></button>
 <div v-if="auth.logged" v-for="(anuncio, i) in auth.anuncios.value.anuncios" :key="i" id="ads" class="anuncios">
     <div class="container w-75 position-relative float-start ms-4">
       <div class="row mb-5">
 
       <div class="col-4 border">
-        <p d-flex>title:{{ anuncio.tittle }}</p>
-        <p>Price: {{ anuncio.price }}</p>
-        <p>description: {{ anuncio.description }}</p>>
+        <p d-flex>{{ anuncio.tittle }}</p>
+        <p>{{ anuncio.price }}</p>
+        <p>{{ anuncio.description }}</p>>
       </div>
 
 
