@@ -209,10 +209,10 @@ function handleImage(event) {
     <div class="offcanvas offcanvas-end" tabindex="-1" id="userAds" aria-labelledby="loginLabel">
         <div class="offcanvas-header" id="info2">
             <div id="seta"></div>
-            <h5 class="float-center">Adicioar Anuncios</h5>
+            <h5 class="float-center">Adicionar Anuncios</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body container">
+        <div class="offcanvas-body container" id="info">
             <addAdsForm/>
             
         </div>

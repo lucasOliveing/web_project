@@ -104,13 +104,19 @@ export default {
             
         </div> -->
 
-        <div class="base-image-input">
-            <input multiple class="file-input" ref="fileInput" type="file" @input="onSelectFile">
+        <div>
+            <input multiple  class="d-grid gap-2 d-md-block" ref="fileInput" type="file" @input="onSelectFile">
         </div>
 
-        <div v-if="fotos" v-for="foto in fotos">
-            <img :src="foto.src" alt="">
+
+
+        <div class="container text-center">
+        <div class="row align-items-center">
+            <div v-if="fotos" v-for="foto in fotos" class="col-6 my-3">
+                <img :src="foto.src" alt="" class="img-fluid img-thumbnail" id="tam">
+            </div>
         </div>
+    </div>
 
 
 
@@ -119,73 +125,5 @@ export default {
 </template>
 
 <style>
-.base-image-input {
-    display: block;
-    width: 200px;
-    aspect-ratio: 16/9;
-    /* cursor: pointer; */
-    background-size: cover;
-    background-position: center center;
-}
 
-.placeholder {
-    background: #F0F0F0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #333;
-    font-size: 18px;
-    font-family: Helvetica;
-}
-
-.placeholder:hover {
-    background: #E0E0E0;
-}
-
-/* .file-input {
-    display: none;
-} */
-
-
-/* aqui era do codigo antigo */
-.picture__input {
-    display: none;
-}
-
-.picture {
-    width: 200px;
-    aspect-ratio: 16/9;
-    background-color: #ddd;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #aaa;
-    border: 2px dashed;
-    cursor: pointer;
-    font-family: sans-serif;
-    transition: color 300ms ease-in-out, background 300ms ease-in-out;
-    outline: none;
-}
-
-.picture:hover {
-    color: #777;
-    background: #ccc;
-}
-
-.picture:active {
-    color: green;
-    /* background: #eee; */
-}
-
-.picture:focus {
-    color: #777;
-    background: #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .4);
-}
-
-.picture__img {
-    max-width: 100%;
-}
 </style>
