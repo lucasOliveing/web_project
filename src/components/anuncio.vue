@@ -13,7 +13,7 @@ if(!pContent.loaded)
 
 </script>
 <template>
-   <router-link to="userAds">userAds</router-link>
+   <!-- <router-link to="userAds">userAds</router-link> -->
 
 
   <div v-for="(anuncio, i) in pContent.anuncios.value" :key="i"  class="anuncios">

@@ -1,5 +1,6 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue';
+import addAdsForm from './formulario/addAds.vue'
 import { Auth } from "../stores/auth.js"
 import router from '../router/index.js'
 
@@ -15,12 +16,6 @@ const formLogin = ref({
     password: '',
 })
 
-const data = ref({
-    titulo: '',
-    desccricao: '',
-    images: null
-
-})
 
 const auth = Auth();
 
@@ -215,65 +210,8 @@ function handleImage(event) {
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body container">
-
-
-            <!-- Formularios -->
-            <form>
-
-                <!-- Titulo  -->
-                <div class="form-group mb-3 ">
-                    <label for="#titulo" class="float-start">
-                        <h5>Título</h5>
-                    </label>
-                    <input type="text" class="form-control" id="titulo">
-                </div>
-
-                <!-- Descrição -->
-                <div class="form-group mb-3">
-                    <label for="exampleFormControlTextarea1" class="float-start">
-                        <h5>Descrição</h5>
-                    </label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
-
-
-                <!-- Condicao -->
-                <div class="container mb-4">
-                    <label for="#condition">
-                        <h5>Estado</h5>
-                    </label>
-                    <div class="border p-3" id="condition">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="RadioOptions" id="Radio1" value="opcao1">
-                            <label class="form-check-label float-start" for="Radio1">Novo</label>
-                        </div>
-                        <div class="form-check ">
-                            <input class="form-check-input" type="radio" name="RadioOptions" id="Radio2" value="opcao2">
-                            <label class="form-check-label float-start" for="Radio2">Usado em estado novo</label>
-                        </div>
-                        <div class="form-check ">
-                            <input class="form-check-input" type="radio" name="RadioOptions" id="Radio3" value="opcao3">
-                            <label class="form-check-label float-start" for="Radio3">Usado em boas condicoes</label>
-                        </div>
-                        <div class="form-check ">
-                            <input class="form-check-input" type="radio" name="RadioOptions" id="Radio4" value="opcao3">
-                            <label class="form-check-label float-start" for="Radio4">Usado em condiçoes razoaveis</label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Adicionar Imagens -->
-                <div class="form-group my-1">
-                    <label for="imageFild" class="float-start" @change="handleImag">
-                        <h5>Adicionar Imagens</h5>
-                    </label>
-                    <input id="imageFiel" type="file" class="float-start" @change="handleImageChange">
-                </div>
-
-
-
-
-            </form>
+            <addAdsForm/>
+            
         </div>
     </div>
 <!-- 
