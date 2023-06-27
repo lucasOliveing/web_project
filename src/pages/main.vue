@@ -12,4 +12,7 @@ import forms from "../components/formulario/addAds.vue"
     <cabecalho />
     <anuncio />
     <categoria />
+
+
+    <!-- testing -->
 </template>
