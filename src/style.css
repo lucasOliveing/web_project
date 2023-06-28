@@ -142,6 +142,17 @@ button {
   box-shadow: inset 0px 0px 5px 3px rgba(165, 164, 164, 0.6);
 }
 
+textarea{
+  box-shadow: inset 0px 0px 5px 3px rgba(126, 126, 126, 0.6);
+  border-radius: 5%;
+}
+
+#titulo{
+  box-shadow: inset 0px 0px 5px 3px rgba(126, 126, 126, 0.6);
+}
+
+
+
 /* .ads{
   background-color: rgb(230, 133, 6);
 }
