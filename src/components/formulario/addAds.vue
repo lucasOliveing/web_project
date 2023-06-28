@@ -1,42 +1,100 @@
 <script>
-
+import axios from 'axios'
+import { Auth } from "../../stores/auth.js"
 
 export default {
     data() {
         return {
             fotos: [],
+            input: null,
+            auth: Auth(),
+            tittle: '',
+            description: '',
         }
     },
     methods: {
         onSelectFile() {
-            const input = this.$refs.fileInput
-            const files = input.files
-            console.log(files)
+            this.input = this.$refs.fileInput
+            const files = this.input.files
+
+
+
+
+            console.log(this.tittle)
+            console.log(this.description)
             const imgs = []
             let self = this;
             if (files) {
-                
-                for(let i = 0; i< files.length; i++){
+
+                for (let i = 0; i < files.length; i++) {
                     const reader = new FileReader
                     reader.addEventListener("load", function (e) {
                         const readerTarget = e.target;
 
                         const img = document.createElement('img');
                         img.src = readerTarget.result
-                        img.classList.add('base-image-input')
+                        // img.classList.add('base-image-input')
 
                         self.fotos.push(img)
                     })
-                    
+
                     reader.readAsDataURL(files[i])
                     this.$emit('input', files[i])
 
                 }
-                console.log(this.fotos)
             }
         },
+
+        async uploadingFotos() {
+            const files = this.input.files
+
+            console.log(files)
+
+            let self = this
+            const arrayFotos = []
+            for (let i = 0; i < self.fotos.length; i++) {
+                arrayFotos.push(await fetch(self.fotos[i].src).then(response => response.blob()))
+            }
+
+
+
+            const formData = new FormData();
+            for (let i = 0; i < arrayFotos.length; i++) {
+                formData.append('files', arrayFotos[i], files[i].name)
+            }
+
+
+            await axios.post('http://localhost:1337/api/upload/', formData, {
+                headers: {
+                    Authorization: `Bearer ${self.auth.token}`,
+                },
+
+            }).then(response => {
+                const imageId = response.data.map(item => item.id)
+                // console.log(imageId)
+                axios.post('http://localhost:1337/api/anuncios/', {
+
+                    user: self.auth.id,
+                    data: {
+                        tittle: self.tittle,
+                        description: self.description,
+                        user: self.auth.id,
+                        photos: imageId
+                    }
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${self.auth.token}`,
+                    },
+
+                }).then(response => console.log(response))
+            })
+
+
+
+        }
     }
 }
+
 
 
 </script>
@@ -55,7 +113,7 @@ export default {
             <label for="#titulo" class="float-start">
                 <h5>Título</h5>
             </label>
-            <input type="text" class="form-control" id="titulo">
+            <input type="text" class="form-control" id="titulo" v-model="tittle">
         </div>
 
         <!-- Descrição -->
@@ -63,7 +121,8 @@ export default {
             <label for="exampleFormControlTextarea1" class="float-start">
                 <h5>Descrição</h5>
             </label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea class="form-control" type="text" id="exampleFormControlTextarea1" rows="3"
+                v-model="description"></textarea>
         </div>
 
 
@@ -107,6 +166,9 @@ export default {
         <div class="base-image-input">
             <input multiple class="file-input" ref="fileInput" type="file" @input="onSelectFile">
         </div>
+
+
+        <button @click.prevent="uploadingFotos()">enviar</button>
 
         <div v-if="fotos" v-for="foto in fotos">
             <img :src="foto.src" alt="">
