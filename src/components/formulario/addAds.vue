@@ -91,9 +91,15 @@ export default {
 
 
 
-        }
+        },
+
+        deletar(i){
+                this.fotos.pop(i)
+            }
     }
 }
+
+ 
 
 
 
@@ -167,13 +173,16 @@ export default {
             <input multiple class="d-grid gap-2 d-md-block" ref="fileInput" type="file" @input="onSelectFile">
         </div>
 
+        
+
 
         <button @click.prevent="uploadingFotos()">enviar</button>
 
         <div class="container text-center">
             <div class="row align-items-center">
-                <div v-if="fotos" v-for="foto in fotos" class="col-6 my-3">
+                <div v-if="fotos" v-for="(foto, i) in fotos" class="col-6 my-3" :key="i">
                     <img :src="foto.src" alt="" class="img-fluid img-thumbnail" id="tam">
+                    <button @click.prevent="deletar(i)"></button>
                 </div>
             </div>
         </div>
