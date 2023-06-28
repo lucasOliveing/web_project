@@ -164,21 +164,19 @@ export default {
         </div> -->
 
         <div>
-            <input multiple  class="d-grid gap-2 d-md-block" ref="fileInput" type="file" @input="onSelectFile">
+            <input multiple class="d-grid gap-2 d-md-block" ref="fileInput" type="file" @input="onSelectFile">
         </div>
 
 
         <button @click.prevent="uploadingFotos()">enviar</button>
 
         <div class="container text-center">
-        <div class="row align-items-center">
-    
-
-        <div v-if="fotos" v-for="foto in fotos" class="col-6 my-3">
-                <img :src="foto.src" alt="" class="img-fluid img-thumbnail" id="tam">
+            <div class="row align-items-center">
+                <div v-if="fotos" v-for="foto in fotos" class="col-6 my-3">
+                    <img :src="foto.src" alt="" class="img-fluid img-thumbnail" id="tam">
+                </div>
             </div>
         </div>
-    </div>
 
 
 
@@ -186,6 +184,4 @@ export default {
     </form>
 </template>
 
-<style>
-
-</style>
+<style></style>
