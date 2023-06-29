@@ -63,7 +63,9 @@ function handleImage(event) {
     <!-- Login -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="login" aria-labelledby="loginLabel">
         <div class="offcanvas-header" id="info2">
-            <div id="seta"></div>
+            <div><button class="btn" data-bs-toggle="offcanvas" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+</svg></button></div>
             <h5 id="loginLabel">Login</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
@@ -104,7 +106,9 @@ function handleImage(event) {
     <!-- Register -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="register" aria-labelledby="loginLabel">
         <div class="offcanvas-header" id="info2">
-            <div id="seta"></div>
+            <div><button class="btn" data-bs-toggle="offcanvas" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+</svg></button></div>
             <h5 id="loginLabel">Register</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
@@ -157,7 +161,11 @@ function handleImage(event) {
 
         <div v-if="!auth.logged">
             <div class="offcanvas-header">
+                <div><button class="btn" data-bs-toggle="offcanvas" data-bs-target="#login"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+</svg></button></div>
                 <h5 id="loginLabel">Error</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
 
             <div class="offcanvas-body container">
@@ -172,7 +180,9 @@ function handleImage(event) {
 
         <div v-else>
             <div class="offcanvas-header">
-                <div id="seta"></div>
+                <div><button class="btn" data-bs-toggle="offcanvas" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+</svg></button></div>
                 <h5 id="loginLabel">UserOpt</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
@@ -208,7 +218,9 @@ function handleImage(event) {
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="userAds" aria-labelledby="loginLabel">
         <div class="offcanvas-header" id="info2">
-            <div id="seta"></div>
+            <div><button class="btn" data-bs-toggle="offcanvas" data-bs-target="#userOpt"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+</svg></button></div>
             <h5 class="float-center">Adicionar Anuncios</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
