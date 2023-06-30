@@ -110,7 +110,7 @@ export default {
 
         <!-- Titulo  -->
         <div class="form-group mb-3 ">
-            <label for="#titulo" class="float-start">
+            <label for="titulo" class="float-start">
                 <h5>Título</h5>
             </label>
             <input type="text" class="form-control" id="titulo" v-model="tittle">
@@ -128,9 +128,7 @@ export default {
 
         <!-- Condicao -->
         <div class="container mb-4">
-            <label for="#condition">
                 <h5>Estado</h5>
-            </label>
             <div class="border p-3" id="condition">
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="RadioOptions" id="Radio1" value="opcao1">
@@ -151,17 +149,6 @@ export default {
             </div>
         </div>
 
-        <!-- Adicionar Imagens -->
-        <!-- <div class="form-group my-1">
-            <label class="picture" tabindex="0">
-                <input type="file" accept="image/*" class="picture__input">
-                
-                <span class="picture__image">
-                   
-                </span>
-            </label>
-            
-        </div> -->
 
         <div>
             <input multiple class="d-grid gap-2 d-md-block" ref="fileInput" type="file" @input="onSelectFile">

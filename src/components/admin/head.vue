@@ -1,7 +1,7 @@
 <script setup>
-import router from '../router/index.js'
-import sideMenu from './canvas/sideMenu.vue'
-import { Auth } from "../stores/auth.js"
+import router from '../../router/index.js'
+import sideMenu from '../canvas/sideMenu.vue'
+import { Auth } from "../../stores/auth.js"
 
 const auth = Auth();
 </script>
@@ -35,19 +35,6 @@ const auth = Auth();
         </div>
     </nav>
 
-
-
-
-
-
-
-
-    
-<!-- 
-    {{ formLogin }}
-    {{ auth.logged }}
-    {{ auth.token }}
-    <h5>User ID: {{ auth.id }}</h5> -->
 </template>
 
 

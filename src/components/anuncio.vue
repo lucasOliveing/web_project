@@ -8,7 +8,7 @@ const pContent = publicContent()
 if(!pContent.loaded)
 {
   pContent.getAds()
-  pContent.loaded = true
+  // pContent.loaded = true
 }
 
 </script>
@@ -61,11 +61,8 @@ if(!pContent.loaded)
     </div>
    
   </div>
-
   
 </div>
-
-
 </template>
 
 
