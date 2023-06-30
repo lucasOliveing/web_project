@@ -1,10 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import main from '../pages/main.vue'
-// import userAds from '../pages/userAds.vue'
-import userAds from '../components/userAds.vue'
-
-
+import userAds from '../pages/authUser/userAds.vue'
+import adminHome from '../pages/admin/admin.vue'
  
 
 // const routes = RouteRecordRaw[] = []:
@@ -15,6 +13,7 @@ const router = createRouter({
     routes: [
       { path: '/', component: main },
       { path: '/userAds', component: userAds },
+      { path: '/admin', component: adminHome},
     ]
   })
   

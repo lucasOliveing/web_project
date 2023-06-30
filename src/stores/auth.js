@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import { api } from '../apiConfig.js'
+import router from '../router/index.js'
 
 
 
@@ -16,18 +17,24 @@ export const Auth = defineStore('auth', {
             data: ref([]),
             resonseStatus: '',
             anuncios: ref([]),
-            adsLoaded: false
+            role: '',
         }
 
     },
 
     actions: {
+
+        logout(){
+            this.$reset();
+        },
         async login(email, password) {
             await api.post('/auth/local', {
                 identifier: email,
                 password: password,
             }).then(response => {
+
                 if (response.status == '200') {
+
                     this.id = response.data.user.id
                     this.username = response.data.user.username
                     this.email = response.data.user.email
@@ -35,19 +42,34 @@ export const Auth = defineStore('auth', {
                     this.token = response.data.jwt
                     this.logged = true
                     this.resonseStatus = '200'
+
+                    api.get("users/me?populate=role", {
+                        headers: {
+                            Authorization: `Bearer ${this.token}`,
+                        },
+                    }).then(response => {
+                        if(response.status == '200'){
+                            this.role = response.data.role.name
+                            if(this.role == 'Admin'){
+                                router.push('/admin')
+                            }
+                        }else{
+                            console.log("falha ao obter a role do usuario")
+                        }
+                    })
                 } else {
                     console.log(response.data)
                 }
             })
         },
 
-        async register(username,email, password){
-            await api.post('auth/local/register',{
+        async register(username, email, password) {
+            await api.post('auth/local/register', {
                 username,
                 email,
                 password
             }).then(response => {
-                if(response.status == '200'){
+                if (response.status == '200') {
                     this.status = '200'
                     console.log(response.data)
                 } else {
@@ -56,23 +78,24 @@ export const Auth = defineStore('auth', {
             })
         },
 
-        async getUserAds(){
+        async getUserAds() {
 
             await api.get(`users/${this.id}?populate=anuncios.photos`, {
-                 headers:{
+                headers: {
                     Authorization: `Bearer ${this.token}`,
-            },}
+                },
+            }
             ).then(response => {
-                if(response.status == '200'){
-                this.anuncios.value = response.data
+                if (response.status == '200') {
+                    this.anuncios.value = response.data
                     console.log("sucesso na requisicao dos anuncios do usuario");
                     console.log(response)
-                }else{
+                } else {
                     console.log("falha na requisicao dos anuncios do usuario");
                     console.log(response)
                 }
             })
-            
+
         },
 
 

@@ -10,7 +10,7 @@ export const publicContent = defineStore('public', {
             anuncios: ref([]),
             loaded: false,
             categorias: ref([]),
-            cLoaded: false,
+            catLoaded: false,
         }
     },
 
@@ -23,8 +23,6 @@ export const publicContent = defineStore('public', {
         async getCategorias() {
             await api.get("categorias").then(
                 response => { this.categorias.value = response.data.data; })
-
-
         },
     },
     getters: {
