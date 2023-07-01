@@ -17,9 +17,6 @@ export default {
             this.input = this.$refs.fileInput
             const files = this.input.files
 
-
-
-
             console.log(this.tittle)
             console.log(this.description)
             const imgs = []
@@ -40,7 +37,6 @@ export default {
 
                     reader.readAsDataURL(files[i])
                     this.$emit('input', files[i])
-
                 }
             }
         },
@@ -88,9 +84,6 @@ export default {
 
                 }).then(response => console.log(response))
             })
-
-
-
         },
 
         deletar(i){
@@ -98,15 +91,7 @@ export default {
             }
     }
 }
-
- 
-
-
-
 </script>
-
-
-
 
 <template>
     <!--    Formulario para adicionar anuncios -->

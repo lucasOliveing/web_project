@@ -14,7 +14,7 @@ const auth = Auth();
         <div class="container-fluid">
 
 
-            <a class="navbar-brand ms-5">Ads Qxd</a>
+            <button class="btn" @click="router.push('/main')">Ads Qxd</button>
             <form class="d-flex">
                 <input  id="textBox" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="button" @click="Search(search)">Search</button>

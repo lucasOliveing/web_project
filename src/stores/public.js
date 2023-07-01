@@ -8,9 +8,13 @@ export const publicContent = defineStore('public', {
     state: () => {
         return {
             anuncios: ref([]),
+            categoryAds: ref([]),
+            categoryId: null,
             loaded: false,
             categorias: ref([]),
             catLoaded: false,
+            categoryAdsButton: false,
+
         }
     },
 
@@ -24,10 +28,22 @@ export const publicContent = defineStore('public', {
             await api.get("categorias").then(
                 response => { this.categorias.value = response.data.data; })
         },
-    },
-    getters: {
+        async getCategoryAds(id) {
+            if (this.categoryAdsButton && this.categoryId == id) {
+                this.categoryAdsButton = false
+            } else {
+                this.categoryAdsButton = true
+                this.categoryId = id
+                await api.get(`categorias/${id}?populate=anuncios&populate=anuncios.photos`).then(response => {
+                    this.categoryAds.value = response.data.data.attributes.anuncios.data
+                    console.log(this.categoryAds.value)
+                })
+            }
 
-    }
+
+        }
+    },
+
 
 
 })

@@ -154,7 +154,7 @@ export default {
   <div class="container-fluid mb-5">
     <h5 class="position-relative float-start mt-2">Anuncios</h5>
   <button type="button mr-4" class="btn position-relative float-center" data-bs-toggle="offcanvas" data-bs-target="#userAds">Adicionar Anuncio</button>
-  <button type="button" class="btn position-relative float-end" id="adm"><router-link to="/">voltar</router-link></button>
+  <button type="button" class="btn position-relative float-end" id="adm"><router-link to="/main">voltar</router-link></button>
  </div>
 
  <sideMenu/>

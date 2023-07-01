@@ -101,18 +101,5 @@ export const Auth = defineStore('auth', {
 
     },
 
-    getters: {
-        getToken: (state) => {
-            return state.token
-        },
-        getState: (state) => {
-            return state.logged
-        },
-        getUserName: (state) => {
-            return state.username
-        }
-
-    }
-
 
 })
