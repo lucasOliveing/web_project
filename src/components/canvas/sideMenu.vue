@@ -148,7 +148,7 @@ async function register() {
     </div>
 
     <!-- Register Sucess -->
-    <button type="button" data-bs-toggle="offcanvas" data-bs-target="#registerSucess" ref="regisSucess"> </button>
+    <button type="button" data-bs-toggle="offcanvas" data-bs-target="#registerSucess" ref="regisSucess" style="display: none;"> </button>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="registerSucess" aria-labelledby="loginLabel">
         <div class="offcanvas-header" id="info2">
             <div id="seta"></div>
