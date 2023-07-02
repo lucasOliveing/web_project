@@ -240,4 +240,17 @@ async function register() {
 
         </div>
     </div>
+
+
+    <!-- anuncio adicionado -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="adsSend" aria-labelledby="loginLabel">
+        <div class="offcanvas-header" id="info2">
+            <div id="seta"></div>
+            <h5 class="float-center">Anuncio Adicionado</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body container" id="info">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="offcanvas" >Concluir</button>
+        </div>
+    </div>
 </template>

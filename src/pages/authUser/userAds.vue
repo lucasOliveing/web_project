@@ -22,6 +22,12 @@ export default {
     tittleRef(i) {
       return `tittleRef_${i}`
     },
+    stateRef(i){
+      return `stateRef_${i}`
+    },
+    priceRef(i) {
+      return `priceRef_${i}`
+    },
     descriptionRef(i) {
       return `descripRef_${i}`
     },
@@ -59,9 +65,12 @@ export default {
       buttons[5].style.display = ""
     },
     updateButton(i) {
+      const stateField = this.$refs[this.stateRef(i)][0]
+      const priceField = this.$refs[`priceRef_${i}`][0];
       const tittleField = this.$refs[`tittleRef_${i}`][0];
       const descripField = this.$refs[`descripRef_${i}`][0];
       this.editing(i)
+
 
 
       tittleField.disabled = false
@@ -70,11 +79,18 @@ export default {
       descripField.disabled = false
       descripField.value = this.auth.anuncios.value.anuncios[i].description
 
+      priceField.disabled = false
+      priceField.value = this.auth.anuncios.value.anuncios[i].preco
+
+      stateField.disabled = false
+      stateField.value = this.auth.anuncios.value.anuncios[i].estado
 
 
     },
 
     saveAbord(i) {
+      const stateField = this.$refs[this.stateRef(i)][0]
+      const priceField = this.$refs[`priceRef_${i}`][0]
       const tittleField = this.$refs[`tittleRef_${i}`][0];
       const descripField = this.$refs[`descripRef_${i}`][0];
       const buttons = this.$refs[this.buttonsDivRef(i)][0].children
@@ -86,27 +102,38 @@ export default {
 
       tittleField.disabled = true
       descripField.disabled = true
+      priceField.disabled = true
+      stateField.disabled = true
 
       tittleField.value = ''
       descripField.value = ''
+      priceField.value = ''
+      stateField.value = ''
 
     },
 
     save(i) {
-
+      const stateField = this.$refs[this.stateRef(i)][0]
+      const priceField = this.$refs[`priceRef_${i}`][0]
       const tittleField = this.$refs[`tittleRef_${i}`][0];
       const descripField = this.$refs[`descripRef_${i}`][0];
 
       this.auth.anuncios.value.anuncios[i].tittle = tittleField.value
       this.auth.anuncios.value.anuncios[i].description = descripField.value
+      this.auth.anuncios.value.anuncios[i].preco = priceField.value
+      this.auth.anuncios.value.anuncios[i].estado = stateField.value
 
       tittleField.disabled = true
       descripField.disabled = true
+      priceField.disabled = true
+      stateField.disabled = true
 
       api.put(`anuncios/${this.auth.anuncios.value.anuncios[i].id}`, {
         data: {
           tittle: tittleField.value,
           description: descripField.value,
+          preco: priceField.value,
+          estado: stateField.value
         }
       }, {
         headers: {
@@ -126,23 +153,23 @@ export default {
         response => {
           const fotos = response.data.data.attributes.photos.data
           console.log(fotos)
-          if(fotos){
-          for (let i = 0; i < fotos.length; i++) {
-            api.delete(`upload/files/${fotos[i].id}`, {
-              headers: {
-                Authorization: `Bearer ${this.auth.token}`
-              }
-            }).then(response => {
-              if (response.status == '200') {
-                console.log("deletado com sucesso")
-              }
-            })
+          if (fotos) {
+            for (let i = 0; i < fotos.length; i++) {
+              api.delete(`upload/files/${fotos[i].id}`, {
+                headers: {
+                  Authorization: `Bearer ${this.auth.token}`
+                }
+              }).then(response => {
+                if (response.status == '200') {
+                  console.log("deletado com sucesso")
+                }
+              })
+            }
           }
         }
-        }
       )
-      
-      this.auth.anuncios.value.anuncios.splice(i,1)
+
+      this.auth.anuncios.value.anuncios.splice(i, 1)
 
     },
     deleteAbord(i) {
@@ -186,17 +213,58 @@ export default {
 
 
         <div class="col-6 border">
-          <div class="container">
-            <div class="row">
-              <div class="col-9 pt-4">
-                <input type="text" class="flex" :placeholder="anuncio.tittle" :disabled="true" style="width: auto;"
-                  :ref="tittleRef(i)">
+          <div class="row justify-content-center mb-3">
+            <div class="col-7">
+              <div class="row">
+                <div class="container">
+                  <div class="row">
+                    <h5>Título: </h5>
+                  </div>
+                  <div class="row">
+                    <input type="text" class="flex" :placeholder="anuncio.tittle" :disabled="true" style="width: auto;"
+                      :ref="tittleRef(i)">
+                  </div>
+                </div>
               </div>
-              <div class="col-3 pt-3">
-                <p>Price: ######{{ anuncio.price }}</p>
+            </div>
+
+
+
+
+            <div class="col-3">
+              <div class="container">
+                <h5>Preço:</h5>
+                <div class="row">
+                  <input type="number" :placeholder="anuncio.preco" :ref="priceRef(i)" :disabled="true">
+                </div>
               </div>
-              <textarea type="text" :placeholder="anuncio.description" :disabled="true"
-                :ref="descriptionRef(i)"></textarea>
+            </div>
+          </div>
+
+
+
+          <div class="row justify-content-center">
+            <div class="container">
+              <h5>Descrição:</h5>
+              <div class="row mx-1">
+                <textarea type="text" style="width: 100%; height: 100%;" :placeholder="anuncio.description"
+                  :disabled="true" :ref="descriptionRef(i)"></textarea>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-3">
+              <h5>Estado:</h5>
+            </div>
+            <div class="col-6">
+              <select id="estadoField" class="form-select mb-3" :disabled="true" :ref="stateRef(i)" placeholder="Estado" aria-label="Default select example" :value="auth.anuncios.value.anuncios[i].estado">
+                <option value="Novo">Novo</option>
+                <option value="Usado em estado novo">Usado em estado novo</option>
+                <option value="Usado em boas condições">Usado em boas condições</option>
+                <option value="Usado em condições razoaveis">Usado em condições razoaveis</option>
+              </select>
             </div>
           </div>
         </div>
@@ -247,4 +315,5 @@ export default {
       </div>
 
     </div>
-</div></template>
+  </div>
+</template>

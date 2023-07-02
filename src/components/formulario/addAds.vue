@@ -13,7 +13,8 @@ export default {
             auth: Auth(),
             tittle: '',
             description: '',
-            public: publicContent()
+            public: publicContent(),
+            preco: 0
         }
     },
     methods: {
@@ -63,33 +64,40 @@ export default {
                 formData.append('files', arrayFotos[i], files[i].name)
             }
 
-
-            await axios.post('http://localhost:1337/api/upload/', formData, {
-                headers: {
-                    Authorization: `Bearer ${self.auth.token}`,
-                },
-
-            }).then(response => {
-                const imageId = response.data.map(item => item.id)
-                // console.log(imageId)
-                axios.post('http://localhost:1337/api/anuncios/', {
-
-                    user: self.auth.id,
-                    data: {
-                        tittle: self.tittle,
-                        description: self.description,
-                        user: self.auth.id,
-                        estado: self.estado,
-                        categoria: self.categoria,
-                        photos: imageId
-                    }
-                }, {
+            try {
+                await axios.post('http://localhost:1337/api/upload/', formData, {
                     headers: {
                         Authorization: `Bearer ${self.auth.token}`,
                     },
 
-                }).then(response => console.log(response))
-            })
+                }).then(response => {
+                    const imageId = response.data.map(item => item.id)
+                    // console.log(imageId)
+                    axios.post('http://localhost:1337/api/anuncios/', {
+
+                        user: self.auth.id,
+                        data: {
+                            tittle: self.tittle,
+                            description: self.description,
+                            user: self.auth.id,
+                            estado: self.estado,
+                            categoria: self.categoria,
+                            photos: imageId,
+                            preco: self.preco
+                        }
+                    }, {
+                        headers: {
+                            Authorization: `Bearer ${self.auth.token}`,
+                        },
+
+                    }).then(response => console.log(response))
+                })
+                this.$refs.adsSend.click()
+
+            } catch (error) {
+
+            }
+
         },
 
         deletar(i) {
@@ -121,8 +129,8 @@ export default {
                 <h5>Descrição</h5>
             </label>
             <div class="col-11">
-            <textarea class="form-control" type="text" id="exampleFormControlTextarea1" rows="3"
-                v-model="description"></textarea>
+                <textarea class="form-control" type="text" id="exampleFormControlTextarea1" rows="3"
+                    v-model="description"></textarea>
             </div>
         </div>
 
@@ -135,7 +143,7 @@ export default {
                 </label>
                 <select id="categoriaField" class="form-select mb-3" aria-label="Default select example"
                     v-model="categoria">
-                    <option v-for="(categoria, i) in public.categorias.value" :value="i+1"> {{
+                    <option v-for="(categoria, i) in public.categorias.value" :value="i + 1"> {{
                         categoria.attributes.name }}</option>
 
                 </select>
@@ -151,6 +159,15 @@ export default {
                     <option value="Usado em boas condições">Usado em boas condições</option>
                     <option value="Usado em condições razoaveis">Usado em condições razoaveis</option>
                 </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-5 ms-1 mb-3">
+                <label for="precoField" class="float-start">
+                    <h5>Preço</h5>
+                </label>
+                <input type="number" class="form-control" id="precoField" v-model="preco">
             </div>
         </div>
 
@@ -181,9 +198,8 @@ export default {
             </div>
         </div>
 
-
-        {{ categoria }}
     </form>
+    <button type="button" data-bs-toggle="offcanvas" data-bs-target="#adsSend" ref="adsSend" style="display: none;"></button>
 </template>
 
 <style></style>
