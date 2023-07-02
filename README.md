@@ -35,11 +35,11 @@ Comentários disponíveis nos anúncios.
 
 **Frontend:**
 
-Lista as tecnologias, frameworks e bibliotecas utilizados.
+Vue, Bootstrap, Javascript, CSS, HTML
 
 **Backend:**
 
-Lista as tecnologias, frameworks e bibliotecas utilizados.
+Strapi, Axios, Pinia, VueRouter
 
 
 ## :shipit: Operações implementadas para cada entidade da aplicação
@@ -47,9 +47,9 @@ Lista as tecnologias, frameworks e bibliotecas utilizados.
 
 | Entidade| Criação | Leitura | Atualização | Remoção |
 | --- | --- | --- | --- | --- |
-| Entidade 1 | X |  X  |  | X |
-| Entidade 2 | X |    |  X | X |
-| Entidade 3 | X |    |  |  |
+| Usuário public |  |  X  |  |  |
+| Usuário login | X |  x  |   |  |
+| Usuário Admin | X |  x  | x | x |
 
 > Lembre-se que é necessário implementar o CRUD de pelo menos duas entidades.
 
