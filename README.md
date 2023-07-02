@@ -35,11 +35,11 @@ Comentários disponíveis nos anúncios.
 
 **Frontend:**
 
-Vue, Bootstrap, Javascript, CSS, HTML
+Vue, Bootstrap, Javascript, CSS, HTML, bootstrap Icons.
 
 **Backend:**
 
-Strapi, Axios, Pinia, VueRouter
+Strapi, Axios, Pinia, VueRouter.
 
 
 ## :shipit: Operações implementadas para cada entidade da aplicação
