@@ -169,6 +169,15 @@ export default {
             
         </div> -->
 
+        <div class="form-group mb-3">
+          <label for="#price" class="float-start">
+            <h5>Preço</h5>
+          </label>
+          <input type="text" class="form-control" id="preco" v-model="price">
+        </div>
+
+
+
         <div>
             <input multiple class="d-grid gap-2 d-md-block" ref="fileInput" type="file" @input="onSelectFile">
         </div>

@@ -15,8 +15,8 @@ const auth = Auth()
 
       <div class="col-4 border">
         <p d-flex>{{ anuncio.tittle }}</p>
-        <p>{{ anuncio.price }}</p>
-        <p>{{ anuncio.description }}</p>>
+        <p>{{  anuncio.price }}</p>
+        <p>{{ anuncio.description }}</p>
       </div>
 
 
