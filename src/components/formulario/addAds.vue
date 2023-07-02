@@ -10,6 +10,7 @@ export default {
             auth: Auth(),
             tittle: '',
             description: '',
+            price: '',
         }
     },
     methods: {
@@ -22,6 +23,7 @@ export default {
 
             console.log(this.tittle)
             console.log(this.description)
+            console.log(this.price)
             const imgs = []
             let self = this;
             if (files) {

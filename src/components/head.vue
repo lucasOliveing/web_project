@@ -81,7 +81,7 @@ function handleImage(event) {
                         placeholder="Email">
 
                     <!-- Senha -->
-                    <input  id="textBox"  v-model="formLogin.password" type="password" class="form-control m-3" placeholder="Senha">
+                    <input  id="textBox1"  v-model="formLogin.password" type="password" class="form-control m-3" placeholder="Senha">
                 </div>
 
                 <!-- button -->
@@ -119,23 +119,23 @@ function handleImage(event) {
 
                 <!-- username -->
                 <div class="form-group">
-                    <input  id="textBox"  v-model="formRegist.username" type="text" class="form-control mx-3 my-3"
+                    <input  id="textBox2"  v-model="formRegist.username" type="text" class="form-control mx-3 my-3"
                         placeholder="Nome de Usuário">
                 </div>
 
                 <!-- email -->
                 <div class="form-group">
-                    <input  id="textBox"  v-model="formRegist.email" type="email" class="form-control mx-3 my-3"
+                    <input  id="textBox3"  v-model="formRegist.email" type="email" class="form-control mx-3 my-3"
                         aria-describedby="emailHelp" placeholder="Seu email">
                 </div>
 
                 <!-- password -->
 
                 <div class="form-group">
-                    <input  id="textBox"  v-model="formRegist.password" type="password" class="form-control mx-3 my-1" placeholder="Senha">
+                    <input  id="textBox4"  v-model="formRegist.password" type="password" class="form-control mx-3 my-1" placeholder="Senha">
                 </div>
                 <div class="form-group">
-                    <input  id="textBox"  v-model="formRegist.passwordConfir" type="password" class="form-control mx-3 mb-2"
+                    <input  id="textBox5"  v-model="formRegist.passwordConfir" type="password" class="form-control mx-3 mb-2"
                         placeholder="Confirmar senha">
                 </div>
 
