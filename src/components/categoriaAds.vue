@@ -4,7 +4,7 @@ import { publicContent } from '../stores/public.js'
 
 
 const pContent = publicContent()
-
+pContent.categoryAds.value = []
 if(!pContent.loaded)
 {
   pContent.getAds()
@@ -13,10 +13,8 @@ if(!pContent.loaded)
 
 </script>
 <template>
-   <!-- <router-link to="userAds">userAds</router-link> -->
-
-
-  <div v-for="(anuncio, i) in pContent.anuncios.value" :key="i"  class="anuncios">
+    <div v-if="pContent.categoryAds.value.length > 0">
+  <div v-for="(anuncio, i) in pContent.categoryAds.value" :key="i"  class="anuncios">
     <div class="container w-75 position-relative float-start ms-4">
       <div class="row mb-5">
 
@@ -62,7 +60,12 @@ if(!pContent.loaded)
    
   </div>
   
+
 </div>
+</div>
+<div v-else>
+    <h2>Não há anúncios</h2>
+</div>
+
+
 </template>
-
-

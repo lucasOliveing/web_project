@@ -1,22 +1,27 @@
-<script>
-import { defineComponent, onMounted, ref } from "vue";
-import { api } from "../apiConfig.js";
+<script setup>
+import { publicContent } from '../stores/public.js'
+import { api } from '../apiConfig.js'
+import router from '../router';
 
+const pContent = publicContent()
 
-export default defineComponent({
-  name: "categories",
-  setup() {
-    const categorias = ref([]);
+if (!pContent.cLoaded) {
+    pContent.getCategorias()
+    pContent.cLoaded = true
+}
 
-    const getCategorias = () => api.get("categorias").then(
-      response => {  categorias.value = response.data.data; })
+function getCategoryAds(id, name) {
+    pContent.getCategoryAds(id)
 
-    onMounted(getCategorias);
+    if (pContent.categoryAdsButton) {
+        router.push('/categoria=' + name)
+    } else {
+        router.push('/main')
+    }
+}
 
-    return { categorias };
-  },
-});
 </script>
+
 
 <template>
     <div class="container w-25  position-fixed end-0">
@@ -24,9 +29,12 @@ export default defineComponent({
         <div class="container-fluid">
             <h1>Category</h1>
             <div class=" border">
-            <h5 v-for="(categoria, i) in categorias" class="c-h5">{{ categoria.attributes.name }}</h5>
+                <div class="row" v-for="(categoria, i) in pContent.categorias.value" :key="i">
+                    <button class="btn" @click="getCategoryAds(categoria.id, categoria.attributes.name)">
+                        <h5> {{ categoria.attributes.name }}</h5>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-    </div>
-
 </template>

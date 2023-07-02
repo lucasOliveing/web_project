@@ -1,7 +1,4 @@
 <script setup>
-import anuncio from './components/anuncio.vue'
-import cabecalho from "./components/head.vue"
-import categoria from "./components/categoria.vue"
 
 
 </script>
@@ -9,12 +6,10 @@ import categoria from "./components/categoria.vue"
 <template>
     
     <main class="container overflow-auto">
-      <cabecalho />
-
-      <anuncio />
-      <categoria />
-
+      <router-view></router-view>
     </main>
+    
+
 </template> 
 
 <style scoped>

@@ -1,6 +1,6 @@
 <script setup>
 
-import { publicContent } from '../stores/public.js'
+import { publicContent } from '../../stores/public.js'
 
 
 const pContent = publicContent()
@@ -8,12 +8,11 @@ const pContent = publicContent()
 if(!pContent.loaded)
 {
   pContent.getAds()
-  // pContent.loaded = true
+  pContent.loaded = true
 }
 
 </script>
 <template>
-   <!-- <router-link to="userAds">userAds</router-link> -->
 
 
   <div v-for="(anuncio, i) in pContent.anuncios.value" :key="i"  class="anuncios">

@@ -1,7 +1,7 @@
 <script setup>
-import router from '../router/index.js'
-import sideMenu from './canvas/sideMenu.vue'
-import { Auth } from "../stores/auth.js"
+import router from '../../router/index.js'
+import sideMenu from '../canvas/sideMenu.vue'
+import { Auth } from "../../stores/auth.js"
 
 const auth = Auth();
 </script>
@@ -14,7 +14,7 @@ const auth = Auth();
         <div class="container-fluid">
 
 
-            <button class="btn" @click="router.push('/main')">Ads Qxd</button>
+            <a class="navbar-brand ms-5">Ads Qxd</a>
             <form class="d-flex">
                 <input  id="textBox" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="button" @click="Search(search)">Search</button>
@@ -35,19 +35,6 @@ const auth = Auth();
         </div>
     </nav>
 
-
-
-
-
-
-
-
-    
-<!-- 
-    {{ formLogin }}
-    {{ auth.logged }}
-    {{ auth.token }}
-    <h5>User ID: {{ auth.id }}</h5> -->
 </template>
 
 
