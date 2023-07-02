@@ -4,14 +4,14 @@ import { api } from "../../apiConfig"
 import sideMenu from '../../components/canvas/sideMenu.vue'
 
 export default {
-  components:{
+  components: {
     sideMenu
   },
   data() {
     return {
       updateBut: 'Editar',
       auth: Auth(),
-      
+
 
       tittleTemp: '',
       descriptionTemp: '',
@@ -25,10 +25,10 @@ export default {
     descriptionRef(i) {
       return `descripRef_${i}`
     },
-    buttonsDivRef(i){
+    buttonsDivRef(i) {
       return `buttRef_${i}`
     },
-    editing(i){
+    editing(i) {
       const buttons = this.$refs[this.buttonsDivRef(i)][0].children
 
       buttons[0].style.display = "none"
@@ -38,7 +38,7 @@ export default {
       buttons[4].style.display = "none"
       buttons[5].style.display = "none"
     },
-    seved(i){
+    seved(i) {
       const buttons = this.$refs[this.buttonsDivRef(i)][0].children
 
       buttons[0].style.display = ""
@@ -48,7 +48,7 @@ export default {
       buttons[4].style.display = "none"
       buttons[5].style.display = "none"
     },
-    deleting(i){
+    deleting(i) {
       const buttons = this.$refs[this.buttonsDivRef(i)][0].children
 
       buttons[0].style.display = "none"
@@ -59,11 +59,11 @@ export default {
       buttons[5].style.display = ""
     },
     updateButton(i) {
-      const tittleField = this.$refs[`tittleRef_${i}`][0] ;
+      const tittleField = this.$refs[`tittleRef_${i}`][0];
       const descripField = this.$refs[`descripRef_${i}`][0];
       this.editing(i)
 
-      
+
       tittleField.disabled = false
       tittleField.value = this.auth.anuncios.value.anuncios[i].tittle
 
@@ -74,8 +74,8 @@ export default {
 
     },
 
-    saveAbord(i){
-      const tittleField = this.$refs[`tittleRef_${i}`][0] ;
+    saveAbord(i) {
+      const tittleField = this.$refs[`tittleRef_${i}`][0];
       const descripField = this.$refs[`descripRef_${i}`][0];
       const buttons = this.$refs[this.buttonsDivRef(i)][0].children
 
@@ -89,12 +89,12 @@ export default {
 
       tittleField.value = ''
       descripField.value = ''
- 
-    },
-   
-    save(i){
 
-      const tittleField = this.$refs[`tittleRef_${i}`][0] ;
+    },
+
+    save(i) {
+
+      const tittleField = this.$refs[`tittleRef_${i}`][0];
       const descripField = this.$refs[`descripRef_${i}`][0];
 
       this.auth.anuncios.value.anuncios[i].tittle = tittleField.value
@@ -104,9 +104,9 @@ export default {
       descripField.disabled = true
 
       api.put(`anuncios/${this.auth.anuncios.value.anuncios[i].id}`, {
-        data:{
-        tittle: tittleField.value,
-        description: descripField.value,
+        data: {
+          tittle: tittleField.value,
+          description: descripField.value,
         }
       }, {
         headers: {
@@ -116,16 +116,36 @@ export default {
 
       this.seved(i)
     },
-    deleteAd(i){
-      api.delete(`anuncios/${this.auth.anuncios.value.anuncios[i].id}`, {
+    deleteAd(i) {
+
+      api.delete(`anuncios/${this.auth.anuncios.value.anuncios[i].id}?populate=photos`, {
         headers: {
           Authorization: `Bearer ${this.auth.token}`
         }
-      }).then(response => console.log(response))
+      }).then(
+        response => {
+          const fotos = response.data.data.attributes.photos.data
+          console.log(fotos)
+          if(fotos){
+          for (let i = 0; i < fotos.length; i++) {
+            api.delete(`upload/files/${fotos[i].id}`, {
+              headers: {
+                Authorization: `Bearer ${this.auth.token}`
+              }
+            }).then(response => {
+              if (response.status == '200') {
+                console.log("deletado com sucesso")
+              }
+            })
+          }
+        }
+        }
+      )
+      
+      this.auth.anuncios.value.anuncios.splice(i,1)
 
-      this.auth.anuncios.value.anuncios.pop(i)
     },
-    deleteAbord(i){
+    deleteAbord(i) {
 
       const buttons = this.$refs[this.buttonsDivRef(i)][0].children
 
@@ -138,9 +158,9 @@ export default {
       buttons[5].style.display = "none" //abortar
 
     }
-    
-    
-  
+
+
+
   },
 
 
@@ -150,16 +170,17 @@ export default {
 </script>
 
 <template>
-  
   <div class="container-fluid mb-5">
     <h5 class="position-relative float-start mt-2">Anuncios</h5>
-  <button type="button mr-4" class="btn position-relative float-center" data-bs-toggle="offcanvas" data-bs-target="#userAds">Adicionar Anuncio</button>
-  <button type="button" class="btn position-relative float-end" id="adm"><router-link to="/main">voltar</router-link></button>
- </div>
+    <button type="button mr-4" class="btn position-relative float-center" data-bs-toggle="offcanvas"
+      data-bs-target="#userAds">Adicionar Anuncio</button>
+    <button type="button" class="btn position-relative float-end" id="adm"><router-link
+        to="/main">voltar</router-link></button>
+  </div>
 
- <sideMenu/>
+  <sideMenu />
 
- <div v-if="auth.logged" v-for="(anuncio, i) in auth.anuncios.value.anuncios" :key="i" id="ads">
+  <div v-if="auth.logged" v-for="(anuncio, i) in auth.anuncios.value.anuncios" :key="i" id="ads">
     <div class="container w-75 position-relative float-start ms-4">
       <div class="row mb-5">
 
@@ -174,7 +195,8 @@ export default {
               <div class="col-3 pt-3">
                 <p>Price: ######{{ anuncio.price }}</p>
               </div>
-              <textarea type="text" :placeholder="anuncio.description" :disabled="true" :ref="descriptionRef(i)"></textarea>
+              <textarea type="text" :placeholder="anuncio.description" :disabled="true"
+                :ref="descriptionRef(i)"></textarea>
             </div>
           </div>
         </div>
@@ -225,5 +247,4 @@ export default {
       </div>
 
     </div>
-  </div>
-</template>
+</div></template>

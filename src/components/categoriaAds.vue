@@ -4,7 +4,7 @@ import { publicContent } from '../stores/public.js'
 
 
 const pContent = publicContent()
-
+pContent.categoryAds.value = []
 if(!pContent.loaded)
 {
   pContent.getAds()

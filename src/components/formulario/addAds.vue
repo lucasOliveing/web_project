@@ -1,15 +1,19 @@
 <script>
 import axios from 'axios'
 import { Auth } from "../../stores/auth.js"
+import { publicContent } from '../../stores/public'
 
 export default {
     data() {
         return {
+            estado: "",
+            categoria: '',
             fotos: [],
             input: null,
             auth: Auth(),
             tittle: '',
             description: '',
+            public: publicContent()
         }
     },
     methods: {
@@ -75,6 +79,8 @@ export default {
                         tittle: self.tittle,
                         description: self.description,
                         user: self.auth.id,
+                        estado: self.estado,
+                        categoria: self.categoria,
                         photos: imageId
                     }
                 }, {
@@ -86,9 +92,9 @@ export default {
             })
         },
 
-        deletar(i){
-                this.fotos.pop(i)
-            }
+        deletar(i) {
+            this.fotos.pop(i)
+        }
     }
 }
 </script>
@@ -100,52 +106,64 @@ export default {
     <form>
 
         <!-- Titulo  -->
-        <div class="form-group mb-3 ">
-            <label for="titulo" class="float-start">
+        <div class="form-group mb-3 row justify-content-center">
+            <label for="titulo">
                 <h5>Título</h5>
             </label>
-            <input type="text" class="form-control" id="titulo" v-model="tittle">
+            <div class="col-11 ">
+                <input type="text" class="form-control" id="titulo" v-model="tittle">
+            </div>
         </div>
 
         <!-- Descrição -->
-        <div class="form-group mb-3">
+        <div class="form-group mb-3 row justify-content-center">
             <label for="exampleFormControlTextarea1" class="float-start">
                 <h5>Descrição</h5>
             </label>
+            <div class="col-11">
             <textarea class="form-control" type="text" id="exampleFormControlTextarea1" rows="3"
                 v-model="description"></textarea>
-        </div>
-
-
-        <!-- Condicao -->
-        <div class="container mb-4">
-                <h5>Estado</h5>
-            <div class="border p-3" id="condition">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="RadioOptions" id="Radio1" value="opcao1">
-                    <label class="form-check-label float-start" for="Radio1">Novo</label>
-                </div>
-                <div class="form-check ">
-                    <input class="form-check-input" type="radio" name="RadioOptions" id="Radio2" value="opcao2">
-                    <label class="form-check-label float-start" for="Radio2">Usado em estado novo</label>
-                </div>
-                <div class="form-check ">
-                    <input class="form-check-input" type="radio" name="RadioOptions" id="Radio3" value="opcao3">
-                    <label class="form-check-label float-start" for="Radio3">Usado em boas condicoes</label>
-                </div>
-                <div class="form-check ">
-                    <input class="form-check-input" type="radio" name="RadioOptions" id="Radio4" value="opcao3">
-                    <label class="form-check-label float-start" for="Radio4">Usado em condiçoes razoaveis</label>
-                </div>
             </div>
         </div>
 
 
-        <div>
-            <input multiple class="d-grid gap-2 d-md-block" ref="fileInput" type="file" @input="onSelectFile">
+        <!-- Condicao -->
+        <div class="row">
+            <div class="col-6">
+                <label for="categoriaField" class="float-start">
+                    <h5>Categoria</h5>
+                </label>
+                <select id="categoriaField" class="form-select mb-3" aria-label="Default select example"
+                    v-model="categoria">
+                    <option v-for="(categoria, i) in public.categorias.value" :value="i+1"> {{
+                        categoria.attributes.name }}</option>
+
+                </select>
+            </div>
+            <div class="col-6">
+                <label for="categoriaField" class="float-start">
+                    <h5>Estado</h5>
+                </label>
+                <select id="estadoField" class="form-select mb-3" placeholder="Estado" aria-label="Default select example"
+                    v-model="estado">
+                    <option value="Novo">Novo</option>
+                    <option value="Usado em estado novo">Usado em estado novo</option>
+                    <option value="Usado em boas condições">Usado em boas condições</option>
+                    <option value="Usado em condições razoaveis">Usado em condições razoaveis</option>
+                </select>
+            </div>
         </div>
 
-        
+
+        <div class="mb-3">
+            <label for="fotosField" class="float-start">
+                <h5>Fotos</h5>
+            </label>
+            <input multiple id="fotosField" class="d-grid gap-2 d-md-block" ref="fileInput" type="file"
+                @input="onSelectFile">
+        </div>
+
+
 
 
         <button class="btn btn-outline-secondary" @click.prevent="uploadingFotos()">Enviar</button>
@@ -154,16 +172,17 @@ export default {
             <div class="row align-items-center">
                 <div v-if="fotos" v-for="(foto, i) in fotos" class="col-6 my-3" :key="i">
                     <img :src="foto.src" alt="" class="img-fluid img-thumbnail" id="tam">
-                    <button class="btn" @click.prevent="deletar(i)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-  <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
-</svg></button>
+                    <button class="btn" @click.prevent="deletar(i)"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                            height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                        </svg></button>
                 </div>
             </div>
         </div>
 
 
-
-
+        {{ categoria }}
     </form>
 </template>
 
