@@ -35,7 +35,7 @@ Comentários disponíveis nos anúncios.
 
 **Frontend:**
 
-Vue, Bootstrap, Javascript, CSS, HTML, bootstrap Icons.
+Vue-3 Javascript, Bootstrap, bootstrapIcons, Vite.
 
 **Backend:**
 
@@ -48,7 +48,7 @@ Strapi, Axios, Pinia, VueRouter.
 | Entidade| Criação | Leitura | Atualização | Remoção |
 | --- | --- | --- | --- | --- |
 | Usuário public |  |  X  |  |  |
-| Usuário login | X |  X  |   |  |
+| Usuário login | X |  X  | X  | X |
 | Usuário Admin | X |  X  | X | X |
 
 > Lembre-se que é necessário implementar o CRUD de pelo menos duas entidades.
