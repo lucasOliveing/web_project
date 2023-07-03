@@ -48,8 +48,8 @@ Strapi, Axios, Pinia, VueRouter.
 | Entidade| Criação | Leitura | Atualização | Remoção |
 | --- | --- | --- | --- | --- |
 | Usuário public |  |  X  |  |  |
-| Usuário login | X |  x  |   |  |
-| Usuário Admin | X |  x  | x | x |
+| Usuário login | X |  X  |   |  |
+| Usuário Admin | X |  X  | X | X |
 
 > Lembre-se que é necessário implementar o CRUD de pelo menos duas entidades.
 
@@ -57,5 +57,7 @@ Strapi, Axios, Pinia, VueRouter.
 
 | Método HTTP | URL |
 | --- | --- |
-| GET | api/entidade1/|
-| POST | api/entidade2 |
+| GET | api.get(/anuncios) | api.get(/categorias) | api.get(/users) | api.get(/upload)
+| POST | api.post(/anuncios) | api.post(/upload) | api.post(/auth) |
+| PUT | api.put(/anuncios) | api.put(/upload) | api.put(/user) |
+| DELETE | api.delete(/anuncios) | api.delete(/upload) | api.delete(/user) |
