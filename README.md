@@ -57,7 +57,7 @@ Strapi, Axios, Pinia, VueRouter.
 
 | Método HTTP | URL |
 | --- | --- |
-| GET | api.get(/anuncios) | api.get(/categorias) | api.get(/users) | api.get(/upload)
-| POST | api.post(/anuncios) | api.post(/upload) | api.post(/auth) |
-| PUT | api.put(/anuncios) | api.put(/upload) | api.put(/user) |
-| DELETE | api.delete(/anuncios) | api.delete(/upload) | api.delete(/user) |
+| GET | api.get(/anuncios)  api.get(/categorias)  api.get(/users)  api.get(/upload)
+| POST | api.post(/anuncios)  api.post(/upload)  api.post(/auth) |
+| PUT | api.put(/anuncios)  api.put(/upload)  api.put(/user) |
+| DELETE | api.delete(/anuncios)  api.delete(/upload)  api.delete(/user) |
