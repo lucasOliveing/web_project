@@ -35,11 +35,11 @@ Comentários disponíveis nos anúncios.
 
 **Frontend:**
 
-Vue-3 Javascript, Bootstrap, bootstrapIcons, Vite.
+Lista as tecnologias, frameworks e bibliotecas utilizados.
 
 **Backend:**
 
-Strapi, Axios, Pinia, VueRouter.
+Lista as tecnologias, frameworks e bibliotecas utilizados.
 
 
 ## :shipit: Operações implementadas para cada entidade da aplicação
@@ -47,9 +47,9 @@ Strapi, Axios, Pinia, VueRouter.
 
 | Entidade| Criação | Leitura | Atualização | Remoção |
 | --- | --- | --- | --- | --- |
-| Usuário public |  |  X  |  |  |
-| Usuário login | X |  X  | X  | X |
-| Usuário Admin | X |  X  | X | X |
+| Entidade 1 | X |  X  |  | X |
+| Entidade 2 | X |    |  X | X |
+| Entidade 3 | X |    |  |  |
 
 > Lembre-se que é necessário implementar o CRUD de pelo menos duas entidades.
 
@@ -57,7 +57,5 @@ Strapi, Axios, Pinia, VueRouter.
 
 | Método HTTP | URL |
 | --- | --- |
-| GET | api.get(/anuncios)  api.get(/categorias)  api.get(/users)  api.get(/upload)
-| POST | api.post(/anuncios)  api.post(/upload)  api.post(/auth) |
-| PUT | api.put(/anuncios)  api.put(/upload)  api.put(/user) |
-| DELETE | api.delete(/anuncios)  api.delete(/upload)  api.delete(/user) |
+| GET | api/entidade1/|
+| POST | api/entidade2 |

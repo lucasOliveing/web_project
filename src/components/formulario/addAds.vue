@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios'
 import { Auth } from "../../stores/auth.js"
+import { api } from '../../apiConfig'
 import { publicContent } from '../../stores/public'
 
 export default {
@@ -9,23 +10,30 @@ export default {
             estado: "",
             categoria: '',
             fotos: [],
+            fotosName : [],
             input: null,
             auth: Auth(),
             tittle: '',
             description: '',
-            price: '',
             public: publicContent(),
-            preco: 0
+            preco: 0,
+            userId: null,
         }
     },
     methods: {
+
+        requireFields() {
+            if (this.tittle != '' && this.estado != '' && this.description != '' && this.categoria != '')
+                return true
+            else
+                return false
+        },
         onSelectFile() {
             this.input = this.$refs.fileInput
             const files = this.input.files
 
             console.log(this.tittle)
             console.log(this.description)
-            console.log(this.price)
             const imgs = []
             let self = this;
             if (files) {
@@ -40,6 +48,7 @@ export default {
                         // img.classList.add('base-image-input')
 
                         self.fotos.push(img)
+                        self.fotosName.push(files[i].name)
                     })
 
                     reader.readAsDataURL(files[i])
@@ -49,32 +58,50 @@ export default {
         },
 
         async uploadingFotos() {
-            const files = this.input.files
-
-            console.log(files)
-
+            let imageId = null
             let self = this
-            const arrayFotos = []
-            for (let i = 0; i < self.fotos.length; i++) {
-                arrayFotos.push(await fetch(self.fotos[i].src).then(response => response.blob()))
-            }
+
+            if (this.requireFields()) {
+
+                if (this.input) {
 
 
 
-            const formData = new FormData();
-            for (let i = 0; i < arrayFotos.length; i++) {
-                formData.append('files', arrayFotos[i], files[i].name)
-            }
 
-            try {
-                await axios.post('http://localhost:1337/api/upload/', formData, {
-                    headers: {
-                        Authorization: `Bearer ${self.auth.token}`,
-                    },
+                    const arrayFotos = []
+                    for (let i = 0; i < self.fotos.length; i++) {
+                        arrayFotos.push(await fetch(self.fotos[i].src).then(response => response.blob()))
+                    }
 
-                }).then(response => {
-                    const imageId = response.data.map(item => item.id)
-                    // console.log(imageId)
+
+
+                    const formData = new FormData();
+                    for (let i = 0; i < arrayFotos.length; i++) {
+                        formData.append('files', arrayFotos[i], this.fotosName[i])
+                    }
+
+                    try {
+                        await axios.post('http://localhost:1337/api/upload/', formData, {
+                            headers: {
+                                Authorization: `Bearer ${self.auth.token}`,
+                            },
+
+                        }).then(response => {
+                            imageId = response.data.map(item => item.id)
+                            console.log(response)
+                            if (!self.userId) {
+                                self.userId = self.auth.id
+                            }
+
+
+                        })
+                    } catch (error) {
+                        console.log("error ao enviar o anuncios")
+                        this.$refs.failSend.click()
+                    }
+                }
+
+                try {
                     axios.post('http://localhost:1337/api/anuncios/', {
 
                         user: self.auth.id,
@@ -92,18 +119,38 @@ export default {
                             Authorization: `Bearer ${self.auth.token}`,
                         },
 
-                    }).then(response => console.log(response))
-                })
-                this.$refs.adsSend.click()
+                    }).then(response => {
+                        if (response.status == '200') {
+                            this.$refs.adsSend.click()
+                            this.tittle = ''
+                            this.description = ''
+                            this.preco = ''
+                            this.estado = ''
+                            this.categoria = ''
+                            this.input = null
+                            this.$refs.fileInput.value = ''
+                            this.fotos = []
 
-            } catch (error) {
+                        } else {
+                            console.log('erro ao enviar o anuncios')
+                            this.$refs.failSend.click()
+                        }
+                    })
 
+                } catch (error) {
+                    console.log("error ao enviar o anuncios")
+                    this.$refs.failSend.click()
+                }
+
+            } else {
+                console.log('require fields empty')
+                this.$refs.failSend.click()
             }
-
         },
 
         deletar(i) {
-            this.fotos.pop(i)
+            this.fotos.splice(i, 1)
+            this.fotosName.splice(i, 1)
         }
     }
 }
@@ -171,12 +218,22 @@ export default {
                 </label>
                 <input type="number" class="form-control" id="precoField" v-model="preco">
             </div>
+            <div class="col-5" v-if="auth.role == 'Admin'">
+                <label for="userField" class="float-start">
+                    <h5>Usuário</h5>
+                </label>
+                <select id="userField" class="form-select mb-3" aria-label="Default select example" v-model="userId">
+                    <option v-for="(user, i) in auth.anuncios.value" :value="user.id"> {{
+                        user.username }}</option>
+
+                </select>
+            </div>
         </div>
 
 
         <div class="mb-3">
             <label for="fotosField" class="float-start">
-                <h5>Fotos</h5>
+                <h5 class="mx-2">Fotos</h5>
             </label>
             <input multiple id="fotosField" class="d-grid gap-2 d-md-block" ref="fileInput" type="file"
                 @input="onSelectFile">
@@ -201,7 +258,11 @@ export default {
         </div>
 
     </form>
-    <button type="button" data-bs-toggle="offcanvas" data-bs-target="#adsSend" ref="adsSend" style="display: none;"></button>
+    <button type="button" data-bs-toggle="offcanvas" data-bs-target="#adsSend" ref="adsSend"
+        style="display: none;"></button>
+
+    <button type="button" data-bs-toggle="offcanvas" data-bs-target="#sendAdsFail" ref="failSend"
+        style="display: none;"></button>
 </template>
 
 <style></style>

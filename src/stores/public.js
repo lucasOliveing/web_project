@@ -9,6 +9,7 @@ export const publicContent = defineStore('public', {
         return {
             anuncios: ref([]),
             categoryAds: ref([]),
+            categoryEmpty: true,
             categoryId: null,
             loaded: false,
             categorias: ref([]),
@@ -19,8 +20,8 @@ export const publicContent = defineStore('public', {
     },
 
     actions: {
-        async getAds() {
-            await api.get("anuncios?populate=*").then(
+        getAds() {
+            api.get("anuncios?populate=*").then(
                 response => { this.anuncios.value = response.data.data; })
         },
 
@@ -31,12 +32,16 @@ export const publicContent = defineStore('public', {
         async getCategoryAds(id) {
             if (this.categoryAdsButton && this.categoryId == id) {
                 this.categoryAdsButton = false
+                this.getAds()
             } else {
                 this.categoryAdsButton = true
                 this.categoryId = id
                 await api.get(`categorias/${id}?populate=anuncios&populate=anuncios.photos`).then(response => {
-                    this.categoryAds.value = response.data.data.attributes.anuncios.data
-                    console.log(this.categoryAds.value)
+                    if(response.data.data.attributes.anuncios.data.length > 0){
+                        this.categoryAds.value = response.data.data.attributes.anuncios.data
+                        this.categoryEmpty = false
+                    }else
+                        this.categoryEmpty = true
                 })
             }
 
