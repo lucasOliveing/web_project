@@ -19,6 +19,12 @@
       "relation": "oneToMany",
       "target": "api::subcategoria.subcategoria",
       "mappedBy": "Categoria"
+    },
+    "anuncios": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::anuncio.anuncio",
+      "mappedBy": "categoria"
     }
   }
 }

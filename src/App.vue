@@ -1,15 +1,8 @@
 <script setup>
-
-
 </script>
 
 <template>
-    
-    <main class="container overflow-auto">
-      <router-view></router-view>
-    </main>
-    
-
+    <router-view></router-view>
 </template> 
 
 <style scoped>
