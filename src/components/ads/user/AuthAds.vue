@@ -14,13 +14,14 @@ const ads = Ads()
 ads.getUserAds(user.id)
 
 console.log(ads.userAnuncios)
+function isEmpty(){
+    if(ads.userAnuncios.length)
+        return true
+    else
+        return false
+}
 </script>
 
 <template>
-    <div v-if="ads.categoryAdsButton">
-        <ShowUserAds :anuncios="ads.categoryAds" />
-    </div>
-    <div v-else>
-        <ShowUserAds :anuncios="ads.userAnuncios" />
-    </div>
+    <ShowUserAds :anuncios="ads.userAnuncios.value" :empty="isEmpty()"/>
 </template>
