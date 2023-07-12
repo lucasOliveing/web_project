@@ -15,53 +15,53 @@ export default {
     },
     methods: {
         updateButton(i) {
-            this.anuncios.value[i].configOpt.optDiv = false
-            this.anuncios.value[i].configOpt.editDiv = true
-            this.anuncios.value[i].configOpt.disabled = false
+            this.anuncios[i].configOpt.optDiv = false
+            this.anuncios[i].configOpt.editDiv = true
+            this.anuncios[i].configOpt.disabled = false
 
-            this.fields.tittle = this.anuncios.value[i].tittle
-            this.fields.preco = this.anuncios.value[i].preco
-            this.fields.description = this.anuncios.value[i].description
-            this.fields.estado = this.anuncios.value[i].estado
+            this.fields.tittle = this.anuncios[i].tittle
+            this.fields.preco = this.anuncios[i].preco
+            this.fields.description = this.anuncios[i].description
+            this.fields.estado = this.anuncios[i].estado
 
             console.log(this.fields)
         },
         save(i) {
-            this.anuncios.value[i].configOpt.optDiv = true
-            this.anuncios.value[i].configOpt.editDiv = false
-            this.anuncios.value[i].configOpt.disabled = true
+            this.anuncios[i].configOpt.optDiv = true
+            this.anuncios[i].configOpt.editDiv = false
+            this.anuncios[i].configOpt.disabled = true
 
-            this.anuncios.value[i].tittle = this.fields.tittle
-            this.anuncios.value[i].preco = this.fields.preco
-            this.anuncios.value[i].description = this.fields.description
-            this.anuncios.value[i].estado = this.fields.estado
+            this.anuncios[i].tittle = this.fields.tittle
+            this.anuncios[i].preco = this.fields.preco
+            this.anuncios[i].description = this.fields.description
+            this.anuncios[i].estado = this.fields.estado
             
-            this.ads.updateAd(this.anuncios.value[i].id, this.user.token, this.fields)
+            this.ads.updateAd(this.anuncios[i].id, this.user.token, this.fields)
 
         },
         saveAbord(i) {
-            this.anuncios.value[i].configOpt.optDiv = true
-            this.anuncios.value[i].configOpt.editDiv = false
-            this.anuncios.value[i].configOpt.disabled = true
+            this.anuncios[i].configOpt.optDiv = true
+            this.anuncios[i].configOpt.editDiv = false
+            this.anuncios[i].configOpt.disabled = true
 
 
             
         },
         deleteButton(i) {
-            this.anuncios.value[i].configOpt.optDiv = false
-            this.anuncios.value[i].configOpt.deleteDiv = true
+            this.anuncios[i].configOpt.optDiv = false
+            this.anuncios[i].configOpt.deleteDiv = true
 
         },
         deleteAbort(i) {
-            this.anuncios.value[i].configOpt.optDiv = true
-            this.anuncios.value[i].configOpt.deleteDiv = false
+            this.anuncios[i].configOpt.optDiv = true
+            this.anuncios[i].configOpt.deleteDiv = false
         },
 
         async deleteAd(i) {
-            const res = await this.ads.deleteAd(this.anuncios.value[i].id, this.user.token)
+            const res = await this.ads.deleteAd(this.anuncios[i].id, this.user.token)
             console.log(res)
             if(res.status == 200){
-                this.anuncios.value[i].show = false
+                this.anuncios[i].show = false
             }else {
                 
             }
@@ -74,8 +74,8 @@ export default {
 
 </script>
 <template>
-    <div v-if="anuncios">
-        <div v-for="(anuncio, i) in anuncios.value" :key="i" class="anuncios">
+    <div v-if="!empty">
+        <div v-for="(anuncio, i) in anuncios" :key="i" class="anuncios">
             <div v-if="anuncio.show" class="container w-75 position-relative float-start ms-4">
                 <div class="row mb-5">
 

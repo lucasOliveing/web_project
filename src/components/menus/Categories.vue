@@ -10,7 +10,10 @@ const rota = defineProps({ In: String, Out: String, user:Boolean })
 
 
 function getCategoryAds(id, name) {
-    ads.getCategoryAds(id, rota.user)
+    if(rota.user)
+        ads.getUsersCategoryAds(id)
+    else
+        ads.getCategoryAds(id, rota.user)
 
     if (ads.categoryAdsButton) {
         router.push(`${rota.In}${name}`)

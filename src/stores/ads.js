@@ -18,6 +18,7 @@ export const Ads = defineStore('Ads', {
             catLoaded: false,
             categoryAdsButton: false,
             updateState: '',
+            categoryAdss: []
         }
     },
 
@@ -26,6 +27,47 @@ export const Ads = defineStore('Ads', {
         getCategories() {
             api.get("categorias").then(
                 response => { this.categorias.value = response.data.data; })
+        },
+
+        async getUsersCategoryAds(id) {
+            if (this.categoryAdsButton && this.categoryId == id) {
+                this.categoryAdsButton = false
+            } else {
+                this.categoryAds = ref([]),
+                this.categoryAdsButton = true
+                this.categoryId = id
+
+                var ads = await api.get(`categorias/${id}?populate=anuncios&populate=anuncios.photos`)
+                ads = ads.data.data.attributes.anuncios.data
+
+                // if(ads.length)
+                // console.log(ads)
+                for (var i = 0; i < ads.length; i++) {
+                    var photos = ads[i].attributes.photos.data
+                    this.categoryAds.push(ads[i].attributes)
+                    this.categoryAds[i].id = ads[i].id
+                    this.categoryAds[i].photos = []
+                    if(photos)
+                    for (let j = 0; j < photos.length; j++) {
+                        this.categoryAds[i].photos.push(photos[j].attributes)
+                        this.categoryAds[i].photos[j].id = photos[j].id
+                    }
+
+                }
+
+                for (let i = 0; i < this.categoryAds.length; i++)
+                    Object.assign(this.categoryAds[i], { configOpt: { optDiv: true, editDiv: false, deleteDiv: false, disabled: true }, show: true })
+                // console.log(photos)
+                // console.log(this.categoryAds)
+                // else
+                // console.log('vazio')
+                // this.categoryAds.value.push
+            }
+            if(!this.categoryAds.length)
+                this.categoryEmpty = true
+            else
+                this.categoryEmpty = false
+
         },
 
         getAllUsersAds() {
@@ -120,20 +162,20 @@ export const Ads = defineStore('Ads', {
                 // this.categoryAds = ref([])
                 api.get(`categorias/${id}?populate=anuncios&populate=anuncios.photos`).then(response => {
                     if (response.data.data.attributes.anuncios.data.length > 0) {
-                        
+
                         this.categoryAds.value = response.data.data.attributes.anuncios.data
                         // console.log(this.categoryAds.value)
                         this.categoryEmpty = false
-                        if (user) {
+                        /* if (user) {
                             // console.log(this.categoryAds.value)
                             var anuncios = []
                             var photos = []
                             for (var i = 0; i < this.categoryAds.value.length; i++) {
                                 anuncios.push(this.categoryAds.value[i].attributes)
-                                
+
                                 console.log(anuncios)
                                 if (anuncios.photos) {
-                                    for (var j = 0; j < anuncios[i].photos.data.length; j++){
+                                    for (var j = 0; j < anuncios[i].photos.data.length; j++) {
                                         photos.push(anuncios[i].photos.data[j].attributes)
                                     }
 
@@ -148,7 +190,7 @@ export const Ads = defineStore('Ads', {
                                 Object.assign(anuncios[i], { configOpt: { optDiv: true, editDiv: false, deleteDiv: false, disabled: true }, show: true })
                             this.categoryAds.value = anuncios
 
-                        }
+                        } */
                     } else
                         // this.categoryAds = null
                         this.categoryEmpty = true

@@ -7,8 +7,8 @@ import Home from '../views/Main.vue'
 import AllAdsVue from '../components/ads/public/AllAds.vue';
 import CategoryAdsVue from '../components/ads/public/CategoryAds.vue';
 import UserAds from '../components/ads/user/AuthAds.vue';
-import AdminAds from '../components/ads/user/AdminAds.vue'
-import AdminUsers from '../components/users/Users.vue'
+import AdminAds from '../views/admin/AdminAds.vue'
+import AdminUsers from '../views/admin/AdminUsers.vue'
 import NotFound from '../erro/NotFound.vue'
 
 
@@ -125,14 +125,14 @@ const router = createRouter({
 
       ],
 
-      beforeEnter: (to, from, next) => {
+      /* beforeEnter: (to, from, next) => {
         const user = Auth()
         if (user.role == 'Admin') {
           next();
         } else {
           next('/');
         }
-      }
+      } */
     },
 
     {

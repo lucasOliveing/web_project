@@ -48,9 +48,7 @@ export default {
       <div class="col-9">
         <router-view></router-view>
       </div>
-      <div class="col-3">
-        <Categories :In="'/user/category/'" :Out="'/userAds'" :user="true"/>
-      </div>
+      
     </div>
   </div>
 </template>

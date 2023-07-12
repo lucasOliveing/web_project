@@ -4,7 +4,8 @@ import Categories from '../components/menus/Categories.vue';
 
 
 import SideMenu from '../components/menus/sideMenu.vue';
-
+import { Ads } from '../stores/ads';
+const ads = Ads()
 </script>
 
 

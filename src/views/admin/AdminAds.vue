@@ -1,16 +1,17 @@
 <script setup>
 import { computed, watch } from 'vue';
-import { Ads } from '../../../stores/ads'
-import Categories from '../../menus/Categories.vue';
-import ShowUserAds from './ShowUserAds/UserAds.vue'
-import AdminNav from '../../menus/AdminNav.vue';
-import Headerr from '../../header/Header.vue';
-import SideMenuVue from '../../menus/SideMenu.vue';
+
+import { Ads } from '../../stores/ads';
+import Categories from '../../components/menus/Categories.vue';
+import ShowUserAds from '../../components/ads/user/ShowUserAds/UserAds.vue'
+import AdminNav from '../../components/menus/AdminNav.vue';
+import Headerr from '../../components/header/Header.vue'
+import SideMenuVue from '../../components/menus/SideMenu.vue';
 
 const ads = Ads()
 
 function isEmpty(){
-    if(ads.userAnuncios)
+    if(ads.userAnuncios.length)
         return true
     else
         return false
@@ -30,7 +31,7 @@ function isEmpty(){
                         <ShowUserAds :anuncios="ads.categoryAds" :empty="ads.categoryEmpty"/>
                     </div>
                     <div v-else>
-                        <ShowUserAds :anuncios="ads.userAnuncios" :empty="isEmpty()"/>
+                        <ShowUserAds :anuncios="ads.userAnuncios.value" :empty="isEmpty()"/>
                     </div>
                 </div>
             </div>
