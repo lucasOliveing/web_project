@@ -10,5 +10,5 @@ const ads = Ads()
 
 
 <template>
-    <ShowAds :anuncios="ads.categoryAds" :empty="ads.categoryEmpty" />
+    <ShowAds :anuncios="ads.filterResult" :empty="ads.categoryEmpty" />
 </template>

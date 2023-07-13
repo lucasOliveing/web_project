@@ -9,7 +9,7 @@ export default {
 </script>
 <template>
     <div v-if="!empty">
-        <div v-for="(anuncio, i) in anuncios.value" :key="i" class="anuncios">
+        <div v-for="(anuncio, i) in anuncios" :key="i" class="anuncios">
             <div class="container w-75 position-relative float-start ms-4">
                 <div class="row mb-5">
 
@@ -18,9 +18,9 @@ export default {
                         <div class="container">
                             <div class="row">
                                 <div class="col-9">
-                                    <h5>{{ anuncio.attributes.tittle }}</h5>
+                                    <h5>{{ anuncio.tittle }}</h5>
                                 </div>
-                                <div class="col-3">R$: <strong>{{ anuncio.attributes.preco }}</strong> </div>
+                                <div class="col-3">R$: <strong>{{ anuncio.preco }}</strong> </div>
                             </div>
 
                             <div class="row">
@@ -30,11 +30,11 @@ export default {
                             </div>
                             <div class="row justify-content-center border" id="descriptionField">
 
-                                <p>{{ anuncio.attributes.description }}</p>
+                                <p>{{ anuncio.description }}</p>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <!-- <p>Contato: <strong>{{ anuncio.attributes.user.data.attributes.contato }}</strong></p> -->
+                                    <!-- <p>Contato: <strong>{{ anuncio.user.data.attributes.contato }}</strong></p> -->
                                 </div>
                             </div>
                         </div>
@@ -46,13 +46,13 @@ export default {
                     <div class="col-8 border">
                         <div :id="'slideAnuncio' + i" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
-                                <div v-for="(photo, j) in anuncio.attributes.photos.data">
+                                <div v-for="(photo, j) in anuncio.photos">
                                     <div v-if="j == 0" class="carousel-item active c-item">
-                                        <img :src="'http://localhost:1337' + photo.attributes.url"
+                                        <img :src="'http://localhost:1337' + photo.url"
                                             class="d-block img-fluid c-img" alt="...">
                                     </div>
                                     <div v-else class="carousel-item c-item">
-                                        <img :src="'http://localhost:1337' + photo.attributes.url"
+                                        <img :src="'http://localhost:1337' + photo.url"
                                             class="d-block img-fluid c-img" alt="...">
                                     </div>
                                 </div>

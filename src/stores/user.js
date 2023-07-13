@@ -23,7 +23,8 @@ export const Auth = defineStore('auth', {
             categorias: ref([]),
             password: null,
             role: '',
-            users: ref([null])
+            users: ref([null]),
+            filterUser: null
         }
 
     },
@@ -37,7 +38,7 @@ export const Auth = defineStore('auth', {
                 identifier: email,
                 password: password,
             }).then(response => {
-                
+
                 if (response.status == '200') {
                     this.id = response.data.user.id
                     this.username = response.data.user.username
@@ -51,7 +52,7 @@ export const Auth = defineStore('auth', {
                             Authorization: `Bearer ${this.token}`,
                         },
 
-                    }).then(response =>{this.role = response.data.role.name})
+                    }).then(response => { this.role = response.data.role.name })
                     return 200
                 } else {
                     return response
@@ -88,17 +89,15 @@ export const Auth = defineStore('auth', {
             }
         },
 
-        getUsers() {
-            api.get(`users/?populate=anuncios`
+        async getUsers() {
+            this.users.value = await api.get(`users/?populate=anuncios`
             ).then(response => {
-                console.log(response.data)
-                this.users.value = response.data
-
-                for (let i = 0; i < this.users.value.length; i++)
-                    this.users.value[i].deleted = false
-
-
+                return response.data
             })
+            for (let i = 0; i < this.users.value.length; i++)
+                this.users.value[i].deleted = false
+
+            this.filterUser = this.users.value
         },
         updateUser(id, data) {      //UpdateUser
             return api.put(`/users/${id}`, data, {
@@ -123,7 +122,7 @@ export const Auth = defineStore('auth', {
                         this.ads.deleteAd(anuncios[i].id, this.token)
                     }
                 }
-            }).catch(erro => {return erro})
+            }).catch(erro => { return erro })
 
             return await api.delete(`users/${id}`, {
                 headers: {

@@ -11,9 +11,9 @@ import SideMenuVue from '../../components/menus/SideMenu.vue';
 const ads = Ads()
 
 function isEmpty(){
-    if(ads.userAnuncios.length)
+    if(ads.filterResult.length == 0){
         return true
-    else
+    }else
         return false
 }
 </script>
@@ -22,17 +22,12 @@ function isEmpty(){
     <SideMenuVue/>
     <div class="container">
         <div class="row">
-            <Headerr :home="'/admin'" />
+            <Headerr :home="'/admin'" :ads="ads.anuncios" @result="ads.search"/>
         </div>
         <div class="row">
             <div class="col-9">
                 <div class="overflow-auto">
-                    <div v-if="ads.categoryAdsButton">
-                        <ShowUserAds :anuncios="ads.categoryAds" :empty="ads.categoryEmpty"/>
-                    </div>
-                    <div v-else>
-                        <ShowUserAds :anuncios="ads.userAnuncios.value" :empty="isEmpty()"/>
-                    </div>
+                        <ShowUserAds :anuncios="ads.filterResult" :empty="isEmpty()"/>
                 </div>
             </div>
             <div class="col-3">

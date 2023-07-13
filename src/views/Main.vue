@@ -6,6 +6,11 @@ import Categories from '../components/menus/Categories.vue';
 import SideMenu from '../components/menus/sideMenu.vue';
 import { Ads } from '../stores/ads';
 const ads = Ads()
+
+
+function search(event){
+    ads.filterResult = event
+}
 </script>
 
 
@@ -15,7 +20,7 @@ const ads = Ads()
     <SideMenu />
     <div class="container">
         <div class="row">
-            <Headerr :home="'/'"/>
+            <Headerr :home="'/'" :ads="ads.anuncios" @result="ads.search"/>
         </div>
 
         <div class="row">
@@ -23,7 +28,7 @@ const ads = Ads()
                 <router-view></router-view>
             </div>
             <div class="col-3">
-                <Categories :In="'/categoria/'" :Out="'/'" :user="false"/>
+                <Categories :In="'/categoria/'" :Out="'/'" :user="true"/>
             </div>
 
         </div>

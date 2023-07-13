@@ -7,6 +7,7 @@ import { ref } from 'vue';
 import AdminNav from '../../components/menus/AdminNav.vue';
 
 
+
 export default {
     components: {
         SideMenu,
@@ -37,7 +38,10 @@ export default {
         userDeleted(event, i) {
             this.$refs[`userField${i}`][0].click()
             this.admin.users.value[i].deleted = true
-        }
+        },
+        search(event){
+            this.admin.filterUser = event
+}
     }
 
 }
@@ -47,11 +51,11 @@ export default {
     <SideMenu />
     <div class="container">
         <div class="row">
-            <Headerr :home="'/admin'" />
+            <Headerr :home="'/admin'" :users="admin.users.value" @result="search" />
         </div>
         <div class="row">
             <div class="col-9">
-                <div class="row" v-for="(user, i) in admin.users.value" :key="i">
+                <div class="row" v-for="(user, i) in admin.filterUser" :key="i">
                     <div class="col-12" v-if="user.username != 'webproject'">
                         <div class="container" v-if="!user.deleted">
                             <button class="btn usuario" data-bs-toggle="collapse" :data-bs-target="'#userFields' + i"

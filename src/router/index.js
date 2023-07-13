@@ -125,14 +125,14 @@ const router = createRouter({
 
       ],
 
-      /* beforeEnter: (to, from, next) => {
+      beforeEnter: (to, from, next) => {
         const user = Auth()
         if (user.role == 'Admin') {
           next();
         } else {
           next('/');
         }
-      } */
+      }
     },
 
     {

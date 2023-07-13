@@ -5,10 +5,10 @@ import ShowAds from './showPublicAds/PublicAds.vue'
 const ads = Ads()
 
 ads.getAds()
-
+ads.filterResult = ads.anuncios
 
 </script>
 
 <template>
-        <ShowAds :anuncios="ads.anuncios" />
+        <ShowAds :anuncios="ads.filterResult" />
 </template>

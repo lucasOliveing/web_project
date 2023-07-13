@@ -24,7 +24,6 @@ export default {
                 return false
         },
         getAds() {
-            this.ads.getUserAds()
             router.push('/admin/ads')
         },
         getUsers() {
